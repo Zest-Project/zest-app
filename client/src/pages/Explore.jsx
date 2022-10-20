@@ -1,8 +1,16 @@
 import React from 'react'
+import CuisineType from '../components/CuisineType'
 
 const Explore = () => {
   return (
-    <div>Explore</div>
+    <div>
+        <div>Explore</div>
+        <div>
+            <CuisineType/>
+            {/* <CuisineType/> */}
+            {/* <CuisineType/> */}
+        </div>
+    </div>
   )
 }
 

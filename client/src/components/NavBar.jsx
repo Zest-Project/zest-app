@@ -29,35 +29,37 @@ const NavBar = () => {
     <div className='navbar'>
         <NavLink to='/'> <div className='logo'> <img src={logo} alt="logo"/> </div> </NavLink>
 
-        <div className='sub_menu'>
-          <NavLink className={({ isActive }) => "navlink" + (isActive ? " active" : "")} to='/profile'> 
-            {/* <div className='profile_container'> */}
-              <div className='navitem profile'> 
-                <div className='profile_img_container'> <img alt="profile_background" /> </div> 
-                <div className='content'> <p> Profile </p></div>
-              </div> 
-            {/* </div> */}
-          </NavLink>
-          <NavLink className={({ isActive }) => "navlink" + (isActive ? " active" : "")} to='/explore'> <div className='navitem explore'> Explore </div> </NavLink>
-          <NavLink className={({ isActive }) => "navlink" + (isActive ? " active" : "")} to='/myrecipes'> <div className='navitem myrecipes'> <div className='content'> My Recipes </div> </div> </NavLink>
-        </div>
+        <div className="logged_in web">
+          <div className='sub_menu'>
+            <NavLink className={({ isActive }) => "navlink" + (isActive ? " active" : "")} to='/profile'> 
+              {/* <div className='profile_container'> */}
+                <div className='navitem profile'> 
+                  <div className='profile_img_container'> <img alt="profile_background" /> </div> 
+                  <div className='content'> <p> Profile </p></div>
+                </div> 
+              {/* </div> */}
+            </NavLink>
+            <NavLink className={({ isActive }) => "navlink" + (isActive ? " active" : "")} to='/explore'> <div className='navitem explore'> Explore </div> </NavLink>
+            <NavLink className={({ isActive }) => "navlink" + (isActive ? " active" : "")} to='/myrecipes'> <div className='navitem myrecipes'> <div className='content'> My Recipes </div> </div> </NavLink>
+          </div>
 
-        <NavLink className={({ isActive }) => "navlink" + (isActive ? " active" : "")} to='/logmeal'> 
-          <div className='navitem logmeal'> 
+          <NavLink className={({ isActive }) => "navlink" + (isActive ? " active" : "")} to='/logmeal'> 
+            <div className='navitem logmeal'> 
+              <div className='content'>
+                <AddCircleIcon className='icon'/> 
+                <p> Log Meal </p>  
+              </div> 
+            </div> 
+          </NavLink>
+          <NavLink className={({ isActive }) => "navlink" + (isActive ? " active" : "")} to='/addrecipe'> 
+            <div className='navitem addrecipe'> 
             <div className='content'>
-              <AddCircleIcon className='icon'/> 
-              <p> Log Meal </p>  
+                <AddCircleIcon className='icon'/> 
+                <p> Add Recipe </p>  
+              </div> 
             </div> 
-          </div> 
-        </NavLink>
-        <NavLink className={({ isActive }) => "navlink" + (isActive ? " active" : "")} to='/addrecipe'> 
-          <div className='navitem addrecipe'> 
-          <div className='content'>
-              <AddCircleIcon className='icon'/> 
-              <p> Add Recipe </p>  
-            </div> 
-          </div> 
-        </NavLink>
+          </NavLink>
+        </div>
     </div>
   )
 }

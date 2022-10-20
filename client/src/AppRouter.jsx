@@ -10,7 +10,7 @@ import MyRecipes from "./pages/MyRecipes";
 import Profile from "./pages/Profile";
 
 const AppRouter = () => {
-  return (<div>
+  return (
     
     <Routes>
         <Route exact path="/" element={<Explore/>}/>
@@ -22,8 +22,7 @@ const AppRouter = () => {
         <Route path="/myrecipes" element={<MyRecipes/>}/>
         <Route path="/profile" element={<Profile/>}/>
     </Routes>
-
-</div>);
+);
 };
 
 export default AppRouter;

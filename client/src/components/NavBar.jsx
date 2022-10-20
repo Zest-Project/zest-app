@@ -33,7 +33,8 @@ const NavBar = () => {
           <NavLink className={({ isActive }) => "navlink" + (isActive ? " active" : "")} to='/profile'> 
             {/* <div className='profile_container'> */}
               <div className='navitem profile'> 
-                <img alt="profile_background" /> 
+                <div className='profile_img_container'> <img alt="profile_background" /> </div> 
+                <div className='content'> <p> Profile </p></div>
               </div> 
             {/* </div> */}
           </NavLink>

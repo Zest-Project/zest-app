@@ -15,9 +15,7 @@ const App = () => {
     <Grid className="grid" container spacing={2} direction={{xs: "column", sm: "row", md: "row", lg: "row", xl: "row" }}>
       <Grid item sm={2} md={2} lg={2} xl={2}> <NavBar/> </Grid>
       <Grid item sm={10} md={10} lg={10} xl={10}> 
-        <div> 
           <AppRouter/> 
-        </div>
       </Grid>
     </Grid>
    </div>

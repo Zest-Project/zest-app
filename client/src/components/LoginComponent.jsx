@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-
+import "../scss/styles";
 const defaultValues = {
     username: "",
     password: "",
 };
 
-const Login = () => {
+const LoginComponent = () => {
     const [formValues, setFormValues] = useState(defaultValues);
 
     const handleInputChange = (e) => {
@@ -17,6 +17,7 @@ const Login = () => {
             ...formValues,
             [name]: value,
         });
+    };
 
         const handleSubmit = (event) => {
             event.preventDefault();
@@ -24,13 +25,14 @@ const Login = () => {
         }
 
         return (
-            <form onSubmit={handleSubmit}>
-                <Grid container alignItems="center" justify="center" direction="column">
+            <>
+            <form className='form' onSubmit={handleSubmit}>
+                <Grid container direction="column">
                     <Grid item>
                         <TextField
-                            id="name-input"
+                            className="name_input"
                             name="name"
-                            label="Name"
+                            label="Username"
                             type="text"
                             value={formValues.username}
                             onChange={handleInputChange}
@@ -38,7 +40,7 @@ const Login = () => {
                     </Grid>
                     <Grid item>
                         <TextField
-                            id="name-input"
+                            className="name_input"
                             name="name"
                             label="Password"
                             type="text"
@@ -48,13 +50,14 @@ const Login = () => {
                     </Grid>
                     
                 </Grid>
-                <Button variant="contained" color="primary" type="submit"> Submit </Button>
+                <Button className='btn' variant="contained" color="primary" type="submit"> Login </Button>
+                <Button className='btn' variant="contained" color="primary" type="submit"> Signup </Button>
             </form>
-
+            </>
         )
-    };
+    
 };
 
-export default Login;
+export default LoginComponent;
 
 

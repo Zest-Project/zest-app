@@ -13,7 +13,6 @@ import { useAuth } from "../context/AuthProvider";
 import PropTypes from 'prop-types'
 
 // import AppRouter from "../AppRouter";
-
 const ProtectedLayout = ({children}) => {
   // const token = useContext(AuthContext);
   const {token} = useAuth();
@@ -21,7 +20,7 @@ const ProtectedLayout = ({children}) => {
   // const outlet = useOutlet();
 
   if (!token) {
-    return <Navigate to="/" replace/>;
+    return <Navigate to="/login" replace/>;
   }
 
   return children ? children : (

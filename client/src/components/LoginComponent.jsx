@@ -4,13 +4,10 @@ import Grid from "@mui/material/Grid";
 import "../scss/styles";
 import { useAuth } from "../context/AuthProvider";
 
-
 const defaultValues = {
     username: "",
     password: "",
 };
-
-
 
 const LoginComponent = () => {
     const [formValues, setFormValues] = useState(defaultValues);

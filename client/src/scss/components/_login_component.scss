@@ -1,20 +1,65 @@
 @use "../variables" as v;
 
+label {
+     color: v.$off_white;
+}
+
+// .sign_in {
+//     position:  absolute;
+//     z-index: 100;
+// }
+.title { // I don't think its fully centered
+    display: Flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: v.$salmon;
+}
 .form {
     // background-color: v.$dark_forest_green;
     display: Flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    // border: 1px solid;
+    padding: 5rem 5rem;
+    background-color: v.$dark_forest_green;
+    opacity: .8;
+    border-radius: 1.563rem;
+}
+
+
+.item {
+    display: Flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .input {
-    background-color: v.$light_olive_green;
+    background-color: v.$light_forest_green;
+    padding: .5rem 1rem;
+    display: Flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     
+    border-radius: 1.563rem;
+    display: block;
+    // color: v.$off_white;  
+     
 }
 
+// .input::placeholder {
+//     color: v.$off_white;
+// }
+
 .btn {
+   background-color: v.$light_olive_green;
+   border-radius: 1.563rem;
+   padding: .5rem 1rem;
+   color: v.$off_white;
+   opacity: .8;
    display: Flex; 
    flex-direction: Center;
    align-items: center;

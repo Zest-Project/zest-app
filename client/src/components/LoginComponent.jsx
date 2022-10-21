@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+
 import "../scss/styles";
+import { useAuth } from "../context/AuthProvider";
+
+
 const defaultValues = {
     username: "",
     password: "",
@@ -12,6 +14,7 @@ const defaultValues = {
 
 const LoginComponent = () => {
     const [formValues, setFormValues] = useState(defaultValues);
+    const {onLogin} = useAuth();
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -21,43 +24,51 @@ const LoginComponent = () => {
         });
     };
 
-        const handleSubmit = (event) => {
-            event.preventDefault();
-            console.log(formValues);
-        }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(formValues);
+    }
 
         return (
             <div className="sign_in">
+                
             <form className='form' onSubmit={handleSubmit}>
-                <Grid container direction="column" spacing={5}>
-                    <Grid item>
-                        <TextField
-                            className="input"
-                            name="name"
-                            label="Username"
-                            type="text"
-                            value={formValues.username}
-                            onChange={handleInputChange}
-                        />
+                
+                <Grid className='container' container direction="column" spacing={3}>
+                    <label className='title'>Sign In</label>    
+                    <Grid className ='item' item>
+                        <label>
+                            Username:
+                            <input 
+                                type="text"
+                                className='input'
+                                name='name'
+                                // placeholder='username'
+                                onChange={handleInputChange} 
+                            />
+                        </label>
                     </Grid>
 
-                    <Grid item>
-                        <TextField
-                            className="input"
-                            name="name"
-                            label="Password"
-                            type="text"
-                            value={formValues.password}
-                            onChange={handleInputChange}
-                        />
+                    <Grid className ='item' item>
+                        <label>
+                            Password:
+                            <input 
+                                type="password"
+                                className='input'
+                                name='name'
+                                // placeholder='password'
+                                onChange={handleInputChange} 
+                            />
+                        </label>
+                        
                     </Grid>
 
-                    <Grid item>
-                        <Button className='btn' variant="contained" color="primary" type="submit"> Login </Button>
+                    <Grid className ='item' item>
+                        <button className='btn' type="button" onClick={onLogin}> Login </button> 
                     </Grid>
 
-                    <Grid item>
-                        <Button className='btn' variant="contained" color="primary" type="submit"> Signup </Button>
+                    <Grid className ='item' item>
+                        <button className='btn' type="buttin"> Signup </button> 
                     </Grid>
                     
                 </Grid>

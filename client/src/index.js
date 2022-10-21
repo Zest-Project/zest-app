@@ -1,14 +1,31 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import "./scss/styles"
+import { AuthProvider } from "./context/AuthProvider";
+import "./scss/styles";
 
-ReactDOM.render(
-  <React.StrictMode>
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <BrowserRouter>
+//       <AuthProvider>
+//         <App />
+//       </AuthProvider>
+//     </BrowserRouter>
+//   </React.StrictMode>,
+//   document.getElementById("root")
+// );
+root.render(
+  <StrictMode>
     <BrowserRouter>
-      <App/>
+      <AuthProvider>
+          <App />
+      </AuthProvider>
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </StrictMode>
 );

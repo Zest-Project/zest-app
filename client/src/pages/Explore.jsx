@@ -4,7 +4,9 @@ import PageTitle from '../components/PageTitle';
 import '../scss/styles';
 
 
+
 const Explore = () => {
+
   return (
     <div className='explore container'>
         <PageTitle pageTitle="Explore"/>

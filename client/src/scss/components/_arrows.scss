@@ -1,0 +1,8 @@
+.left, .right {
+    margin: 1rem;
+    cursor: pointer;
+
+    svg {
+        pointer-events: none;
+    }
+}

@@ -10,10 +10,11 @@ import MyRecipes from "./pages/MyRecipes";
 import Profile from "./pages/Profile";
 
 const AppRouter = () => {
+  // Changed default page to login as that is how we would start our application
   return (
     
     <Routes>
-        <Route exact path="/" element={<Explore/>}/>
+        <Route exact path="/" element={<Login/>}/> 
         <Route path="/addrecipe" element={<AddRecipe/>}/>
         <Route path="/createnewaccount" element={<CreateNewAccount/>}/>
         <Route path="/explore" element={<Explore/>}/>

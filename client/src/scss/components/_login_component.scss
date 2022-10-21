@@ -1,8 +1,22 @@
 @use "../variables" as v;
 
 .form {
+    // background-color: v.$dark_forest_green;
     display: Flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    // border: 1px solid;
+}
+
+.input {
+    background-color: v.$light_olive_green;
+    
+}
+
+.btn {
+   display: Flex; 
+   flex-direction: Center;
+   align-items: center;
+   justify-content: center;
 }

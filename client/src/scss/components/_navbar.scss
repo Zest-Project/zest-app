@@ -20,21 +20,21 @@
     flex-direction: column;
     height: fit-content;
     // width: fit-content;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
+  }
+  
+  .navitem {
+    background-color: v.$light_forest_green;
+    border-radius: 0.75rem;
 
-    .navitem {
-      background-color: v.$light_forest_green;
+    .content {
+      display: flex;
+      flex-direction: row;
+      padding: 0.5rem;
       border-radius: 0.75rem;
 
-      .content {
-        display: flex;
-        flex-direction: row;
-        padding: 0.5rem;
-        border-radius: 0.75rem;
-
-        .icon {
-          margin-right: 0.5rem;
-        }
+      .icon {
+        margin-right: 0.5rem;
       }
     }
   }
@@ -62,9 +62,9 @@
 
   .sub_menu {
     position: relative;
-    height: 24rem;
+    height: 22rem;
     .navlink:nth-child(1) {
-      height: 16rem;
+      height: 14rem;
     }
     .profile {
       width: 8rem;
@@ -117,7 +117,7 @@
     .explore {
       width: 8rem;
       position: absolute;
-      top: 12rem;
+      top: 10rem;
       border-radius: 8rem 8rem;
       height: 8rem;
       display: flex;
@@ -133,7 +133,7 @@
     .myrecipes {
       width: 8rem;
       position: absolute;
-      top: 16rem;
+      top: 14rem;
       // line-height: 0.01rem;
       border-radius: 0 0 0.75rem 0.75rem;
       height: 8rem;
@@ -171,5 +171,10 @@
     .navitem {
       background-color: v.$deep_olive_green;
     }
+  }
+
+  .navitem.logout {
+    margin-top: 1.5rem; // margin on navlink for rest of the buttons
+    text-align: center;
   }
 }

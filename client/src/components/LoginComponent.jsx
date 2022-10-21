@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 
 import "../scss/styles";
+import { useAuth } from "../context/AuthProvider";
 
 
 const defaultValues = {
@@ -13,6 +14,7 @@ const defaultValues = {
 
 const LoginComponent = () => {
     const [formValues, setFormValues] = useState(defaultValues);
+    const {onLogin} = useAuth();
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -62,11 +64,11 @@ const LoginComponent = () => {
                     </Grid>
 
                     <Grid className ='item' item>
-                        <button className='btn' type="submit"> Login </button> 
+                        <button className='btn' type="button" onClick={onLogin}> Login </button> 
                     </Grid>
 
                     <Grid className ='item' item>
-                        <button className='btn' type="submit"> Signup </button> 
+                        <button className='btn' type="buttin"> Signup </button> 
                     </Grid>
                     
                 </Grid>

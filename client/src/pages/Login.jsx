@@ -1,6 +1,6 @@
 import React from 'react'
 import LoginComponent from '../components/LoginComponent'
-import background from '../images/login_hero.jpg'
+import background from '../images/login_hero.jpeg'
 import '../scss/styles';
 
 const Login = () => {

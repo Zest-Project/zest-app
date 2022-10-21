@@ -1,10 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import '../scss/styles'
 import food from '../images/food.jpeg'
 
-const RecipePreview = () => {
+
+const RecipePreview = ({recipeName}) => {
   return (
     <div className='recipe_preview container'>
 			<div className='top'>
@@ -15,6 +17,7 @@ const RecipePreview = () => {
 				</div>
 			</div>
 			<div className='middle'>
+				<div> {recipeName} </div>
 				<div className='image_container'>
 					<img src={food} alt="food"/>
 				</div>
@@ -37,5 +40,10 @@ const RecipePreview = () => {
     </div>
   )
 }
+
+RecipePreview.propTypes = {
+    recipeName: PropTypes.string
+}
+
 
 export default RecipePreview

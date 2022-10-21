@@ -1,0 +1,10 @@
+@use "../variables" as v; 
+
+.page_title {
+    margin: 1rem;
+    padding-top: 1rem;
+    color: v.$deep_yellow;
+    font-size: v.$large;
+    font-family: v.$highgate;
+    font-weight: v.$bold;
+}

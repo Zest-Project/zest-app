@@ -143,7 +143,7 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
   body {
-    height: 105%;
+    height: 100%;
     overflow-x: hidden;
     // overflow-y: hidden;
     background-repeat: no-repeat;
@@ -167,6 +167,15 @@ html {
     }
   }
 }
+
+.navbar_fixed {
+  width: 12rem;
+}
+
+// .routes {
+//   position: relative;
+//   // padding-left: 15rem !important;
+// }
 
 .grid.MuiGrid-root {
   // max-width:fit-content !important;

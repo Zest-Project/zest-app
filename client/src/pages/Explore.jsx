@@ -1,14 +1,17 @@
 import React from 'react'
 import CuisineType from '../components/CuisineType'
+import PageTitle from '../components/PageTitle';
+import '../scss/styles';
+
 
 const Explore = () => {
   return (
-    <div>
-        <div>Explore</div>
+    <div className='explore container'>
+        <PageTitle pageTitle="Explore"/>
         <div>
             <CuisineType/>
-            {/* <CuisineType/> */}
-            {/* <CuisineType/> */}
+            <CuisineType/>
+            <CuisineType/>
         </div>
     </div>
   )

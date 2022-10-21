@@ -8,6 +8,8 @@ const defaultValues = {
     password: "",
 };
 
+
+
 const LoginComponent = () => {
     const [formValues, setFormValues] = useState(defaultValues);
 
@@ -25,12 +27,12 @@ const LoginComponent = () => {
         }
 
         return (
-            <>
+            <div className="sign_in">
             <form className='form' onSubmit={handleSubmit}>
-                <Grid container direction="column">
+                <Grid container direction="column" spacing={5}>
                     <Grid item>
                         <TextField
-                            className="name_input"
+                            className="input"
                             name="name"
                             label="Username"
                             type="text"
@@ -38,9 +40,10 @@ const LoginComponent = () => {
                             onChange={handleInputChange}
                         />
                     </Grid>
+
                     <Grid item>
                         <TextField
-                            className="name_input"
+                            className="input"
                             name="name"
                             label="Password"
                             type="text"
@@ -48,12 +51,20 @@ const LoginComponent = () => {
                             onChange={handleInputChange}
                         />
                     </Grid>
+
+                    <Grid item>
+                        <Button className='btn' variant="contained" color="primary" type="submit"> Login </Button>
+                    </Grid>
+
+                    <Grid item>
+                        <Button className='btn' variant="contained" color="primary" type="submit"> Signup </Button>
+                    </Grid>
                     
                 </Grid>
-                <Button className='btn' variant="contained" color="primary" type="submit"> Login </Button>
-                <Button className='btn' variant="contained" color="primary" type="submit"> Signup </Button>
+                
+                
             </form>
-            </>
+            </div>
         )
     
 };

@@ -11,20 +11,6 @@ import { Grid } from "@mui/material";
  
 const App = () => {
 
-  // const navRef = useRef(null);
-
-  // const [width, setWidth] = useState(0);
-  // // const [height, setHeight] = useState(0);
-
-  // useLayoutEffect(() => {
-  //   setWidth(navRef.current.offsetWidth);
-  //   // setHeight(navRef.current.offsetHeight);
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(width)
-  // }, [width]);
-
  return (
    <div className="app">        
     <Grid className="grid" container spacing={2} direction={{xs: "column", sm: "row", md: "row", lg: "row", xl: "row" }}>

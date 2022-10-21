@@ -13,34 +13,24 @@ const CuisineType = () => {
   const sliderRef = useRef(null)
   const [left, setLeft] = useState(0);
   const [right, setRight] = useState(0);
-  // const handleLeft = () => {
-  //   // var slider = document.getElementById('slider');
-  //   // slider.scrollLeft = slider.scrollLeft - 500;
-  //   document.getElementById('slider').scrollLeft += 20;
-  // };
 
-  // const handleRight = () => {
-  //   // var slider = document.getElementById('slider');
-  //   // slider.scrollLeft = slider.scrollLeft + 500;
-  //   document.getElementById('slider').scrollLeft -= 20;
-  // };
   const handleLeft =() =>  {
     setLeft(left + 1);
-    console.log("left: " + left);
+    // console.log("left: " + left);
   }
   const handleRight =() => {
     setRight(right + 1);
-    console.log("right: " + right);
+    // console.log("right: " + right);
   }
   
   useEffect(() => {
     sliderRef.current.scrollLeft -= 150;
-    console.log("scrolling left: " + left);
+    // console.log("scrolling left: " + left);
   }, [left]);
 
   useEffect(() => {
     sliderRef.current.scrollLeft += 150;
-    console.log("scrolling right: " + right);
+    // console.log("scrolling right: " + right);
   }, [right]);
 
   return (

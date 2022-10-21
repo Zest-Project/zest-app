@@ -1,8 +1,16 @@
 .left, .right {
-    margin: 1rem;
     cursor: pointer;
+    margin: 0.5rem;
 
     svg {
         pointer-events: none;
     }
 }
+
+// .left {
+//     margin: 0.5;
+// }
+
+// .right {
+//     margin: 1rem 1rem 0rem 1rem;
+// }

@@ -1,12 +1,16 @@
 import React from 'react'
 import LoginComponent from '../components/LoginComponent'
+import background from '../images/login_hero.jpg'
 import '../scss/styles';
 
 const Login = () => {
+
   return (
-    <div className="login_page">
-      <LoginComponent />
+    <div> 
+      <div className="login_hero"> <img src={background} alt="login-hero"/></div>
+      <div className="login_form"> <LoginComponent/> </div>
     </div>
+
   )
 }
 

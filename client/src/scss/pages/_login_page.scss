@@ -1,8 +1,26 @@
 @use "../variables" as v;
 
-.login_page {
-    min-height: 100%;
+
+
+.login_hero {
+    height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+
+    img {
+        width: 100%;
+        object-fit: contain;
+        // margin:0.5rem;
+    }
+}
+
+.login_form {
+    position:  absolute;
+    z-index: 100;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }

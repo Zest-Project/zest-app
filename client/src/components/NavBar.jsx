@@ -94,7 +94,7 @@ const NavBar = () => {
             </div>
           </div>
         </NavLink>
-        {token && (
+        {token && ( // a conditional statement to display logout button
           // <button type="button" onClick={onLogout}>
           //   Log Out
           // </button>

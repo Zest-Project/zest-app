@@ -4,13 +4,10 @@ import Grid from "@mui/material/Grid";
 import "../scss/styles";
 import { useAuth } from "../context/AuthProvider";
 
-
 const defaultValues = {
     username: "",
     password: "",
 };
-
-
 
 const LoginComponent = () => {
     const [formValues, setFormValues] = useState(defaultValues);
@@ -24,15 +21,15 @@ const LoginComponent = () => {
         });
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(formValues);
-    }
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     console.log(formValues);
+    // }
 
         return (
             <div className="sign_in">
                 
-            <form className='form' onSubmit={handleSubmit}>
+            <form className='form' onSubmit={onLogin}>
                 
                 <Grid className='container' container direction="column" spacing={3}>
                     <label className='title'>Sign In</label>    
@@ -64,7 +61,7 @@ const LoginComponent = () => {
                     </Grid>
 
                     <Grid className ='item' item>
-                        <button className='btn' type="button" onClick={onLogin}> Login </button> 
+                        <button className='btn' type="submit" value="Submit"> Login </button> 
                     </Grid>
 
                     <Grid className ='item' item>

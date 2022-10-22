@@ -21,6 +21,7 @@ const AppRouter = () => {
       {/* <Route exact path="/" element={<PreLoginLayout />} > */}
         <Route path="/createnewaccount" element={<CreateNewAccount/>}/>
         <Route path="/login" element={<Login/> }/>
+        {/* <Route exact path="/" element={<Login/>}/> */}
       </Route>
 
       <Route element={<ProtectedLayout/>}> 

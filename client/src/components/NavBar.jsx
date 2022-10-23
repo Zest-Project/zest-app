@@ -9,7 +9,7 @@ import logo from "../images/logo.png";
 // import profile_background_active from '../images/profile_background_active.png'
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import "../scss/styles";
+// import "../scss/styles";
 import { useAuth } from "../context/AuthProvider";
 // import { Button } from "@mui/material";
 

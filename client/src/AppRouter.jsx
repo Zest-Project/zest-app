@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import LogMeal from "./pages/LogMeal";
 import MyRecipes from "./pages/MyRecipes";
 import Profile from "./pages/Profile";
+import LandingPage from "./pages/LandingPage";
 // import ProtectedRoute from "./components/ProtectedRoute";
 
 const AppRouter = () => {
@@ -25,7 +26,7 @@ const AppRouter = () => {
       </Route>
 
       <Route element={<ProtectedLayout/>}> 
-        <Route exact path="/" element={<Explore/>}/>
+        <Route exact path="/" element={<LandingPage/>}/>
         <Route path="/addrecipe" element={<AddRecipe />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/logmeal" element={<LogMeal />} />

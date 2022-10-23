@@ -1,7 +1,13 @@
 @use "../variables" as v;
 
 label {
-     color: v.$off_white;
+    color: v.$off_white;
+    font-size: v.$small;
+    font-family: v.$lato;
+    font-weight: v.$normal;
+    p {
+        margin-bottom: 0.5rem;    }
+    
 }
 
 // .sign_in {
@@ -13,8 +19,14 @@ label {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
+    text-align: center;
+    font-size: v.$large;
+    font-family: v.$highgate;
+    font-weight: v.$bold;
     color: v.$salmon;
+
+    margin: 1rem;
+    // padding-top: 1rem;
 }
 .form {
     // background-color: v.$dark_forest_green;
@@ -43,11 +55,17 @@ label {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
-    border-radius: 1.563rem;
+    border-radius: 0.75rem;
     display: block;
     // color: v.$off_white;  
-     
+}
+
+input[type=text], input[type=password] {
+    background-color: v.$light_forest_green;
+    color: v.$light_olive_green;
+    font-family: v.$lato;
+    font-weight: v.$normal;
+    font-size: v.$small;
 }
 
 // .input::placeholder {
@@ -56,12 +74,16 @@ label {
 
 .btn {
    background-color: v.$light_olive_green;
-   border-radius: 1.563rem;
-   padding: .5rem 1rem;
+   border: none;
+   border-radius: 0.75rem;
+   padding: .5rem 2rem;
    color: v.$off_white;
    opacity: .8;
    display: Flex; 
    flex-direction: Center;
    align-items: center;
    justify-content: center;
+   font-family: v.$lato;
+   font-weight: v.$normal;
+   font-size: v.$small;
 }

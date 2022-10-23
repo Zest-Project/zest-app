@@ -25,7 +25,7 @@ const ProtectedLayout = ({children}) => {
 
   return children ? children : (
     <div>
-      <div>Authenticated as {token}</div>
+      {/* <div>Authenticated as {token}</div> */}
       <Outlet/>
     </div>
   );

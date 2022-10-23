@@ -1,0 +1,32 @@
+@use "../variables" as v;
+
+.landing_page.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    .featured_recipe {
+        width: fit-content;
+        // display: flex;
+        // flex-direction: column;
+        // align-items: center;
+        // justify-content: center;
+        text-align: initial;
+        margin: 0 auto;
+
+        p {
+            text-align: center;
+        }
+    }
+
+    p {
+        margin: 0.5rem;
+    }
+
+    li {
+        padding: 0.5rem;
+        font-weight: v.$light;
+    }
+}

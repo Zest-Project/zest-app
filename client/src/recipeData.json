@@ -1,0 +1,80 @@
+{
+  "recipes": [
+    {
+      "description": "chole a recipe description",
+      "dishName": "Chole",
+      "cuisineType": "Indian",
+      "tags": ["dinner", "snack"],
+      "ingredients": [
+        "chick pea",
+        "masalas",
+        "onion",
+        "tomato",
+        "giner Garlic"
+      ]
+    },
+    {
+      "description": "rajma b recipe description",
+      "dishName": "Rajma",
+      "cuisineType": "Indian",
+      "tags": ["dinner", "snack", "lunch"],
+      "ingredients": [
+        "red kidney beans",
+        "masalas",
+        "onion",
+        "tomato",
+        "giner Garlic"
+      ]
+    },
+    {
+      "description": "dal c recipe description",
+      "dishName": "Dal",
+      "cuisineType": "Indian",
+      "tags": ["snack", "lunch"],
+      "ingredients": ["lentils", "masalas", "onion", "tomato", "giner Garlic"]
+    },
+    {
+      "description": "falafels d recipe description",
+      "dishName": "falafels",
+      "cuisineType": "Mediterranean",
+      "tags": ["dinner", "snack", "lunch"],
+      "ingredients": [
+        "red kidney beans",
+        "masalas",
+        "onion",
+        "tomato",
+        "giner Garlic",
+        "chick pea"
+      ]
+    },
+    {
+      "description": "aloo d recipe description",
+      "dishName": "aloo",
+      "cuisineType": "Indian",
+      "tags": ["snack", "lunch"],
+      "ingredients": ["potato", "masalas", "onion"]
+    },
+    {
+      "description": "tofu d recipe description",
+      "dishName": "tofu",
+      "cuisineType": "Asian",
+      "tags": ["dinner", "lunch"],
+      "ingredients": ["tofu", "veggies", "onion", "noodles", "giner Garlic"]
+    },
+    {
+      "description": "stirfry d recipe description",
+      "dishName": "stirfry",
+      "cuisineType": "Asian",
+      "tags": ["dinner", "snack", "lunch"],
+      "ingredients": [
+        "tofu",
+        "veggies",
+        "onion",
+        "noodles",
+        "giner Garlic",
+        "soy sauce",
+        "chili sauce"
+      ]
+    }
+  ]
+}

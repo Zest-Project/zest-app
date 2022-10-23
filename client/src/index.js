@@ -10,16 +10,6 @@ import "./scss/styles";
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <BrowserRouter>
-//       <AuthProvider>
-//         <App />
-//       </AuthProvider>
-//     </BrowserRouter>
-//   </React.StrictMode>,
-//   document.getElementById("root")
-// );
 root.render(
   <StrictMode>
     <BrowserRouter>

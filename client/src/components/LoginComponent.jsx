@@ -35,7 +35,7 @@ const LoginComponent = () => {
                     <label className='title'>Sign In</label>    
                     <Grid className ='item' item>
                         <label>
-                            Username:
+                            <p> Username: </p>
                             <input 
                                 type="text"
                                 className='input'
@@ -48,7 +48,7 @@ const LoginComponent = () => {
 
                     <Grid className ='item' item>
                         <label>
-                            Password:
+                            <p> Password: </p>
                             <input 
                                 type="password"
                                 className='input'

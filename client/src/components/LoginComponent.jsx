@@ -16,7 +16,7 @@ const LoginComponent = () => {
     
     const navigate = useNavigate();
     const routeChange = () => {
-        let path = '/signup';
+        let path = '/signup'
         navigate(path);
     }
     const handleInputChange = (e) => {
@@ -71,12 +71,10 @@ const LoginComponent = () => {
                     </Grid>
 
                     <Grid className ='item' item>
-                        <button className='btn' onClick={routeChange} value="Submit"> Signup </button> 
+                        <button className='btn' type="button" onClick={routeChange} value="Submit"> Signup </button> 
                     </Grid>
                     
                 </Grid>
-                
-                
             </form>
             </div>
         )

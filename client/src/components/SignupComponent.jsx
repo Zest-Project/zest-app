@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-//import AddImage from './AddImage';
+import AddImage from './AddImage';
 import Grid from "@mui/material/Grid";
 //import PageTitle from "./PageTitle";
 import "../scss/styles";
 import { useAuth } from "../context/AuthProvider";
-
+import { useNavigate } from "react-router-dom";
 const defaultValues = {
   username: "",
   email: "",
@@ -15,6 +15,12 @@ const defaultValues = {
 const SignupComponent = () => {
   const [formValues, setFormValues] = useState(defaultValues);
   const { onSignup } = useAuth();
+
+  const navigate = useNavigate();
+  const routeChange = () => {
+      let path = '/login'
+      navigate(path);
+  }
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({
@@ -27,7 +33,9 @@ const SignupComponent = () => {
       
       <form className="signup-form" onSubmit={onSignup}>
         <Grid className="container" container direction="column" spacing={3}>
+          
           <label className="title">Sign Up</label>
+          <AddImage />
           <Grid className="item" item>
             <label>
               <p> Username: </p>
@@ -82,6 +90,11 @@ const SignupComponent = () => {
 
           <Grid className ='item' item>
             <button className='btn' type="submit" value="Submit"> Login </button> 
+          </Grid>
+
+
+          <Grid className ='item' item>
+            <button className='btn' type="button" onClick={routeChange} value="Submit"> Back </button> 
           </Grid>
 
         </Grid>

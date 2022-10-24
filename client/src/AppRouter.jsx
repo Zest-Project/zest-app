@@ -5,7 +5,7 @@ import ProtectedLayout from "./components/ProtectedLayout";
 // import ProtectedRoute from "./components/ProtectedRoute";
 
 import AddRecipe from "./pages/AddRecipe";
-import CreateNewAccount from "./pages/CreateNewAccount";
+import Signup from "./pages/Signup";
 import Explore from "./pages/Explore";
 import Login from "./pages/Login";
 import LogMeal from "./pages/LogMeal";
@@ -20,7 +20,7 @@ const AppRouter = () => {
     <Routes>
       <Route element={<PreLoginLayout />} >
       {/* <Route exact path="/" element={<PreLoginLayout />} > */}
-        <Route path="/createnewaccount" element={<CreateNewAccount/>}/>
+        <Route path="/signup" element={<Signup/>}/>
         <Route path="/login" element={<Login/> }/>
         {/* <Route exact path="/" element={<Login/>}/> */}
       </Route>

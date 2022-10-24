@@ -28,7 +28,7 @@ label {
     margin: 1rem;
     // padding-top: 1rem;
 }
-.login-form {
+.signup-form {
     // background-color: v.$dark_forest_green;
     display: Flex;
     flex-direction: column;
@@ -63,7 +63,7 @@ label {
     // color: v.$off_white;  
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email] {
     background-color: v.$light_forest_green;
     color: v.$light_olive_green;
     font-family: v.$lato;
@@ -75,7 +75,7 @@ input[type=text], input[type=password] {
 //     color: v.$off_white;
 // }
 
-//.btn {
+// .btn {
 //    background-color: v.$light_olive_green;
 //    border: none;
 //    border-radius: 0.75rem;
@@ -89,43 +89,4 @@ input[type=text], input[type=password] {
 //    font-family: v.$lato;
 //    font-weight: v.$normal;
 //    font-size: v.$small;
-//}
-
-button {
-    padding: 0.8em 1.8em;
-    border: 2px solid v.$salmon;
-    position: relative;
-    overflow: hidden;
-    background-color: transparent;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 16px;
-    transition: .3s;
-    z-index: 1;
-    font-family: inherit;
-    color: v.$off_white;
-    border-radius:.75rem;
-   }
-   
-   button::before {
-    content: '';
-    width: 0;
-    height: 300%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(45deg);
-    background: v.$salmon;
-    transition: .5s ease;
-    display: block;
-    z-index: -1;
-   }
-   
-   button:hover::before {
-    width: 105%;
-   }
-   
-   button:hover {
-    color: #111;
-   }
-   
+// }

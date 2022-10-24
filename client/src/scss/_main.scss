@@ -1,12 +1,14 @@
 @import url(./_global.scss); // Should only have import statements
 @import url(./components/_navbar.scss);
 @import url(./components/_login_component.scss);
+@import url(./components/_signup_component.scss);
 @import url(./components/_recipe_preview.scss);
 @import url(./components/_cuisine_type.scss);
 @import url(./components/_page_title.scss);
 @import url(./components/_arrows.scss);
 @import url(./components/_search.scss);
 @import url(./pages/_login_page.scss);
+@import url(./pages/_signup_page.scss);
 @import url(./pages/_explore_page.scss);
 @import url(./pages//_landing_page.scss);
 

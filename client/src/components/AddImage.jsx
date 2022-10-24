@@ -6,7 +6,7 @@ const AddImage = (props) => {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
-    if (image == '') return;
+    if (image === '') return;
     const newImageURL = URL.createObjectURL(image);
     setImageUrl(newImageURL);
     URL.revokeObjectURL(imageUrl);

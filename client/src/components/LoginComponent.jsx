@@ -3,16 +3,22 @@ import Grid from "@mui/material/Grid";
 
 import "../scss/styles";
 import { useAuth } from "../context/AuthProvider";
-
+import { useNavigate } from "react-router-dom";
 const defaultValues = {
     username: "",
     password: "",
 };
 
 const LoginComponent = () => {
+    
     const [formValues, setFormValues] = useState(defaultValues);
     const {onLogin} = useAuth();
-
+    
+    const navigate = useNavigate();
+    const routeChange = () => {
+        let path = '/signup';
+        navigate(path);
+    }
     const handleInputChange = (e) => {
         const {name, value} = e.target;
         setFormValues({
@@ -29,7 +35,7 @@ const LoginComponent = () => {
         return (
             <div className="sign_in">
                 
-            <form className='form' onSubmit={onLogin}>
+            <form className='login-form' onSubmit={onLogin}>
                 
                 <Grid className='container' container direction="column" spacing={3}>
                     <label className='title'>Sign In</label>    
@@ -65,7 +71,7 @@ const LoginComponent = () => {
                     </Grid>
 
                     <Grid className ='item' item>
-                        <button className='btn' type="buttin"> Signup </button> 
+                        <button className='btn' onClick={routeChange} value="Submit"> Signup </button> 
                     </Grid>
                     
                 </Grid>

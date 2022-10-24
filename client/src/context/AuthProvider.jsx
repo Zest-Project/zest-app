@@ -23,6 +23,21 @@ export const AuthProvider = ({ children }) => {
   if(token) {
     validateHistoryToken(token);
   }
+  const handleSignup = async (data) => {
+    data.preventDefault();
+    const username = data.target[0].value;
+    const email = data.target[0].value;
+    const password = data.target[2].value;
+    const confirm_pass = data.target[3].value;
+    if (email !== "" && username !== "" && password !== "" && confirm_pass !== "" && password === confirm_pass) {
+      const token = await fakeAuth(username, password);
+      localStorage.setItem("token", JSON.stringify(token));
+      setToken(token);
+      navigate("/");
+    } else {
+      alert("Please enter nonempty username and passwords that match!")
+    }
+  }
 
   const handleLogin = async (data) => {
     data.preventDefault();
@@ -31,7 +46,8 @@ export const AuthProvider = ({ children }) => {
     const token = await fakeAuth(username, password); // pass data here when needed
     localStorage.setItem("token", JSON.stringify(token));
     setToken(token);
-    navigate("/")
+    console.log(token)
+    navigate("/");
   };
 
   const handleLogout = () => {
@@ -44,6 +60,7 @@ export const AuthProvider = ({ children }) => {
     token,
     onLogin: handleLogin,
     onLogout: handleLogout,
+    onSignup: handleSignup,
   };
 
   return (

@@ -1,4 +1,4 @@
-import Search from "../components/Search"
+import Search from "../components/search/Search"
 import React from 'react'
 import CuisineType from '../components/CuisineType'
 import PageTitle from '../components/PageTitle';
@@ -10,8 +10,10 @@ const Explore = () => {
   return (
     <div className='explore container'>
         <LoadingComponent/>
-        <PageTitle pageTitle="Explore"/> 
-        <Search />
+        <div className="header"> 
+          <PageTitle pageTitle="Explore"/> 
+          <Search />
+        </div>
         <div>
             <CuisineType/>
             <CuisineType/>

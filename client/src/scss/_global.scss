@@ -185,3 +185,26 @@ html {
 .grid.MuiGrid-item {
   max-width:fit-content !important;
 }
+
+/* width */
+::-webkit-scrollbar {
+  max-width: 0.5rem !important;
+  max-height: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: v.$light_forest_green;
+  border-radius: 0.5rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: v.$dark_forest_green;
+  border-radius: 0.5rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: v.$deep_olive_green;
+}

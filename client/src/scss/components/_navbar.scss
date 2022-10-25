@@ -56,6 +56,13 @@
     }
   }
 
+  .logo:hover {
+    img {
+      transform: scale(1.1);
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+
   // .profile_container {
   //   // padding: 2rem;
   // }
@@ -92,7 +99,7 @@
         img {
           width: 8rem;
           object-fit: contain;
-          // margin: 1rem;
+          margin: 1rem;
           content: url(../../images/profile_background_inactive.png);
         }
       }
@@ -108,10 +115,17 @@
         img {
           width: 8rem;
           object-fit: contain;
-          // margin: 1rem;
+          margin: 1rem;
           content: url(../../images/profile_background_active.png);
         }
       }
+    }
+
+    .profile_img_container img:hover {
+      width: 8rem;
+      object-fit: contain;
+      content: url(../../images/profile_background_active.png);
+      transition: all 0.9s ease-in;
     }
 
     .explore {
@@ -149,6 +163,12 @@
     }
   }
 
+  .navitem:hover {
+    color: v.$light_forest_green;
+    background-color: v.$light_olive_green;
+    transition: background-color 0.3s ease-in-out;
+  }
+
   .navitem .logmeal {
     // background-color: v.$dark_forest_green !important;
     position: relative;
@@ -169,8 +189,9 @@
     color: v.$light_forest_green;
 
     .navitem {
-      background-color: v.$deep_olive_green;
+      background-color: v.$light_olive_green;
     }
+
   }
 
   .navitem.logout {

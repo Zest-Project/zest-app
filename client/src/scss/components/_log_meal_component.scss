@@ -20,7 +20,7 @@
 
     tbody {
       tr:hover {
-        border: 0.1rem dashed v.$dark_forest_green;
+        border: dashed 0.1rem v.$dark_forest_green;
         border-radius: 0.75rem;
       }
       tr:last-child {
@@ -91,30 +91,10 @@
         flex-direction: row;
         position: relative;
         font-family: v.$lato;
-
-        select {
-          cursor: pointer;
-          position: relative;
-          font-size: v.$small;
-          color: v.$dark_forest_green;
-          background-color: v.$light_forest_green;
-          border-radius: 0.75rem;
-          border: none;
-          width: 9rem;
-          height: 2rem;
-          margin: 0.5rem;
-          text-align: center;
-          background-image: url(../../images/dropdown_arrow.svg);
-          background-position: right 10px center;
-          background-repeat: no-repeat;
-          background-size: auto 50%;
-          outline: none;
-          appearance: none;
-
-          option {
-            background-color: v.$light_forest_green;
-          }
-        }
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        
       }
 
       label {

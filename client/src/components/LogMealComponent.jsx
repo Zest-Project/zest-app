@@ -1,8 +1,14 @@
-import React from "react";
+import * as React from 'react';
 import DeleteIcon from "@mui/icons-material/Delete";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
+import UnstyledSelectForm from './UnstyledSelectForm';
+
+// import { useState } from "react";
 
 const LogMealComponent = () => {
+  // const [fullServing, setFullServing] = useState();
+  const values1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const values2 = ["1/4", "1/2", "1/3", "2/3", "3/4"]
 
   return (
     <div className="log_meal_component container">
@@ -89,27 +95,15 @@ const LogMealComponent = () => {
             />
           </div>
           <div className="entry_item">
-            <label >
-              <p> number_of_servings </p>
+            <label>
+              <p> Number of Servings </p>
             </label>
             <div className="dropdown">
-            <div className="custom-select">
-              <select>
-                <option value="hide"> Full </option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
+              <div className="custom_select">
+                <UnstyledSelectForm values={values1} />
               </div>
-              <div className="custom-select">
-              <select>
-                <option value="hide"> Part </option>
-                <option value="1/4">1/4</option>
-                <option value="1/3">1/3</option>
-                <option value="1/2">1/2</option>
-                <option value="3/4">3/4</option>
-              </select>
+              <div className="custom_select">
+                <UnstyledSelectForm values={values2} />   
               </div>
             </div>
           </div>

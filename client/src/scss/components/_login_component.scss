@@ -1,66 +1,65 @@
 @use "../variables" as v;
 
 label {
-    color: v.$off_white;
-    font-size: v.$small;
-    font-family: v.$lato;
-    font-weight: v.$normal;
-    p {
-        margin-bottom: 0.5rem;    }
-    
+  color: v.$off_white;
+  font-size: v.$small;
+  font-family: v.$lato;
+  font-weight: v.$normal;
+  p {
+    margin-bottom: 0.5rem;
+  }
 }
 
 // .sign_in {
 //     position:  absolute;
 //     z-index: 100;
 // }
-.title { // I don't think its fully centered
-    display: Flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: v.$large;
-    font-family: v.$highgate;
-    font-weight: v.$bold;
-    color: v.$salmon;
+.title {
+  // I don't think its fully centered
+  display: Flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: v.$large;
+  font-family: v.$highgate;
+  font-weight: v.$bold;
+  color: v.$salmon;
 
-    margin: 1rem;
-    // padding-top: 1rem;
+  margin: 1rem;
+  // padding-top: 1rem;
 }
 .login-form {
-    // background-color: v.$dark_forest_green;
-    display: Flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 5rem 5rem;
-    border: 2px solid v.$salmon;
-    background: v.$dark_forest_green;
-    box-shadow:  9px 9px 45px 	#1c2e2c,
-    -9px -9px 45px #263e3c;
-    opacity: .9;
-    border-radius: 1.563rem;
+  // background-color: v.$dark_forest_green;
+  display: Flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 5rem;
+  border: 2px solid v.$salmon;
+  background: v.$dark_forest_green;
+  box-shadow: 9px 9px 45px #1c2e2c, -9px -9px 45px #263e3c;
+  opacity: 0.9;
+  border-radius: 1.563rem;
 }
 
-
 .item {
-    display: Flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: Flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .input {
-    background-color: v.$light_forest_green;
-    padding: .5rem 1rem;
-    display: Flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.75rem;
-    display: block;
-    // color: v.$off_white;  
+  background-color: v.$light_forest_green;
+  padding: 0.5rem 1rem;
+  display: Flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  display: block;
+  // color: v.$off_white;
 }
 
 input[type=text], input[type=password], input[type=email]{
@@ -82,7 +81,7 @@ input[type=text], input[type=password], input[type=email]{
 //    padding: .5rem 2rem;
 //    color: v.$off_white;
 //    opacity: .8;
-//    display: Flex; 
+//    display: Flex;
 //    flex-direction: Center;
 //    align-items: center;
 //    justify-content: center;
@@ -91,7 +90,8 @@ input[type=text], input[type=password], input[type=email]{
 //    font-size: v.$small;
 //}
 
-button {
+.sign_in, .sign_up {
+  button {
     padding: 0.8em 1.8em;
     border: 2px solid v.$salmon;
     position: relative;
@@ -100,15 +100,15 @@ button {
     text-align: center;
     text-transform: uppercase;
     font-size: 16px;
-    transition: .3s;
+    transition: 0.3s;
     z-index: 1;
     font-family: inherit;
     color: v.$off_white;
-    border-radius:.75rem;
-   }
-   
-   button::before {
-    content: '';
+    border-radius: 0.75rem;
+  }
+
+  button::before {
+    content: "";
     width: 0;
     height: 300%;
     position: absolute;
@@ -116,16 +116,16 @@ button {
     left: 50%;
     transform: translate(-50%, -50%) rotate(45deg);
     background: v.$salmon;
-    transition: .5s ease;
+    transition: 0.5s ease;
     display: block;
     z-index: -1;
-   }
-   
-   button:hover::before {
+  }
+
+  button:hover::before {
     width: 105%;
-   }
-   
-   button:hover {
+  }
+
+  button:hover {
     color: #111;
-   }
-   
+  }
+}

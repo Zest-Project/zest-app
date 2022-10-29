@@ -62,13 +62,12 @@ label {
   // color: v.$off_white;
 }
 
-input[type="text"],
-input[type="password"] {
-  background-color: v.$light_forest_green;
-  color: v.$light_olive_green;
-  font-family: v.$lato;
-  font-weight: v.$normal;
-  font-size: v.$small;
+input[type=text], input[type=password], input[type=email]{
+    background-color: v.$light_forest_green;
+    color: v.$light_olive_green;
+    font-family: v.$lato;
+    font-weight: v.$normal;
+    font-size: v.$small;
 }
 
 // .input::placeholder {

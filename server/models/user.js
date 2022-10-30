@@ -60,7 +60,22 @@ const userSchema = new mongoose.Schema({
           }],
           required: true,
           default: []    
-    }
+    },
+    // name of meal: String
+    // serving size
+    // serving name
+    // numServings
+    mealslogged: {
+      type: [{
+          id: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+          },
+          
+        }],
+        required: true,
+        default: []    
+  }
 });
 
 userSchema.plugin(unique);

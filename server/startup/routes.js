@@ -2,12 +2,26 @@ const cors = require('cors');
 const express = require('express');
 const logger = require('../utils/logger');
 const responseTime = require('response-time');
-const authRouter = require('../routes/auth');
+const path = require("path");
+const signupEndpoint = require("../routes/signup");
+const loginEndpoint = require("../routes/login");
+let corsOptions = {
+    origin: 'http://localhost:5001',
+    optionsSuccessStatus: 200
+}
 
-const app = express();
-app.use(cors());
+module.exports = function (app) {
+    // middleware
 
-app.options(cors());
+    app.use(cors(corsOptions));
+    app.options(cors());
+    app.use(express.json());
+    //routes
 
-app.use(express.json());
+    app.use("/api/signup", signupEndpoint)
 
+    app.get("/*", (request, response) => {
+        response.json({message: "Welcome to Zest"})
+    }
+    )
+}

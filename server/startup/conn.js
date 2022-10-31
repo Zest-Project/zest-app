@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 // const logger = rxequire("../utils/logger");
 
 //const dbUri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net/Zest`
-const dbUri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@zest.s14tien.mongodb.net/?retryWrites=true&w=majority`
-//console.log(dbUri)
+const dbUri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@zest.s14tien.mongodb.net/Zest?retryWrites=true&w=majority`
+console.log(dbUri)
 const options = {
   keepAlive: true,
   connectTimeoutMS: 30000,

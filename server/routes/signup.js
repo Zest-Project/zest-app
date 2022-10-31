@@ -6,6 +6,7 @@ const User = require("../models/user");
 
 router.post("/", async (request, response) => {
     const body = request.body;
+    console.log("navigating to signup");
     console.log(body);
     if (!body) {
         return response.json({status: "not ok"});
@@ -17,7 +18,7 @@ router.post("/", async (request, response) => {
         password: body.password,
     });
 
-    return response.json({status: "ok"});
+    return response.send({status: "ok"});
 });
 
 router.get("/", (request, response) => {

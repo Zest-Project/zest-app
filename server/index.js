@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 // const cors = require("cors");
-require('dotenv').config();
 
 
 // app.use(cors());
@@ -11,9 +10,9 @@ require('dotenv').config();
 
 const port = process.env.PORT || 5001;
 // const dbo = require("./startup/conn");
-require('./startup/config');
+require('./startup/config')();
 require('./startup/routes')(app);
-require('./startup/conn');
+require('./startup/conn')();
 
  
 const server = app.listen(port, () => {

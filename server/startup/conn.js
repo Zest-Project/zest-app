@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 // const logger = rxequire("../utils/logger");
-const deletedUser = require("../deletedUser");
 
-const dbUri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net/Zest`
-console.log(dbUri)
+//const dbUri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net/Zest`
+const dbUri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@zest.s14tien.mongodb.net/?retryWrites=true&w=majority`
+//console.log(dbUri)
 const options = {
-  keepAlive: 1,
+  keepAlive: true,
   connectTimeoutMS: 30000,
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -21,7 +21,6 @@ const conn = () => {
         //     else if (data) console.log(data)});
         .then( (conn) => {
             // if (process.env.NODE_ENV === 'development') logger.info('Connected to MongoDB Atlas');
-            deletedUser.create();
             console.log("database connected");
         })
         .catch( (error) => {

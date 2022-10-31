@@ -2,14 +2,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const projectEnvVars = [
-    'NODE_ENV',
-    'DATABASE',
-    'MONGODB_PLANDEMIC_USERNAME',
-    'MONGODB_PLANDEMIC_PASSWORD',
-    'REACT_APP_API',
-    'EMAIL',
-    'EMAIL_PASSWORD',
-    'FRONTEND'
+    'DB_USERNAME',
+    'DB_PASSWORD'
 ]
  
 module.exports = function() {

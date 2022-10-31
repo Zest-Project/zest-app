@@ -1,5 +1,5 @@
-const cors = require('cors');
 const express = require('express');
+const cors = require('cors');
 const logger = require('../utils/logger');
 const responseTime = require('response-time');
 const path = require("path");
@@ -14,7 +14,7 @@ module.exports = function (app) {
     // middleware
 
     app.use(cors(corsOptions));
-    app.options(cors());
+    //app.options(cors());
     app.use(express.json());
     //routes
 

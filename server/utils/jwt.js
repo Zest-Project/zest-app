@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const env = require('../utils/env');
+const env = require('../startup/config');
 
 /**
  * signs a token

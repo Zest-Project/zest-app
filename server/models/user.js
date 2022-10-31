@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const unique = require('mongoose-unique-validator')
-const env = require('../utils/env')
-const conn = require("../db/conn").connect('users');
+const env = require('../startup/config')
+//const conn = require("../db/conn").connect('users');
 const { emailRegex } = require('../utils/patterns');
 
 const userSchema = new mongoose.Schema({
@@ -92,5 +92,5 @@ userSchema.set('toJSON', {
     }
   });
 
-  const User = conn.model(env.DB_USER, userSchema);
+  const User = conn.model("User", userSchema);
   module.exports = User;

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const logger = require('../utils/logger');
-const env = require('../utils/env');
+const env = require('./config');
 
 const connect = (database) => {
     return mongoose.createConnection(

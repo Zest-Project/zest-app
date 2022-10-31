@@ -1,57 +1,87 @@
-const mongoose = require('mongoose');
-const logger = require('../utils/logger');
-const env = require('./config');
+const mongoose = require("mongoose");
+// const logger = rxequire("../utils/logger");
+const deletedUser = require("../deletedUser");
 
-const connect = (database) => {
-    return mongoose.createConnection(
-      `mongodb+srv://${env.DB_USERNAME}:${env.DB_PASSWORD}@${env.DB_CLUSTER}.mongodb.net/${database}?retryWrites=true&w=majority`,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      },
-      (error, result) => {
+const dbUri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net/Zest`
+console.log(dbUri)
+const options = {
+  keepAlive: 1,
+  connectTimeoutMS: 30000,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
+
+const conn = () => {
+    // Connect to the MongoDB cluster
+    mongoose.connect(
+        dbUri,
+        options) 
+        // function(err, data) {
+        //     if (err) throw err;
+        //     else if (data) console.log(data)});
+        .then( (conn) => {
+            // if (process.env.NODE_ENV === 'development') logger.info('Connected to MongoDB Atlas');
+            deletedUser.create();
+            console.log("database connected");
+        })
+        .catch( (error) => {
+            // if (process.env.NODE_ENV === 'development') logger.error('Failed to connect to MongoDB Atlas', error.message);
+            console.log(error);
+        });
+}
+
+module.exports = conn;
+
+// const connect = (database) => {
+//     return mongoose.createConnection(
+//       `mongodb+srv://${env.DB_USERNAME}:${env.DB_PASSWORD}@${env.DB_CLUSTER}.mongodb.net/${database}?retryWrites=true&w=majority`,
+//       {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true
+//       },
+//       (error, result) => {
   
-        if (error) {
-          logger.error(`failed to connect to database: ${error}`);
+//         if (error) {
+//           logger.error(`failed to connect to database: ${error}`);
   
-        } else {
-          logger.info(`connected to database on: ${database}`);
-        }
-        return result;
-      }
-    );
-  };
+//         } else {
+//           logger.info(`connected to database on: ${database}`);
+//         }
+//         return result;
+//       }
+//     );
+//   };
   
-  /**
-   * Connects to local mongodb
-   * 
-   * @param {String} database database name
-   * @returns 
-   */
-  const connectLocal = (database) => {
-    return mongoose.createConnection(
-      `mongodb://localhost:27017/${database}`,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      },
-      (error, result) => {
+//   /**
+//    * Connects to local mongodb
+//    * 
+//    * @param {String} database database name
+//    * @returns 
+//    */
+//   const connectLocal = (database) => {
+//     return mongoose.createConnection(
+//       `mongodb://localhost:27017/${database}`,
+//       {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true
+//       },
+//       (error, result) => {
   
-        if (error) {
-          logger.error(`failed to connect to database: ${error}`);
+//         if (error) {
+//           logger.error(`failed to connect to database: ${error}`);
   
-        } else {
-          logger.info(`locally connected to database on: ${database}`);
-        }
-        return result;
-      }
-    );
-  };
+//         } else {
+//           logger.info(`locally connected to database on: ${database}`);
+//         }
+//         return result;
+//       }
+//     );
+//   };
   
   
-  module.exports = {
-    connect: process.env.LOCAL ? connectLocal : connect,
-  };
+//   module.exports = {
+//     connect: process.env.LOCAL ? connectLocal : connect,
+//   };
   
 
 

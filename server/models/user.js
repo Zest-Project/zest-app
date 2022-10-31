@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const unique = require('mongoose-unique-validator')
-const env = require('../startup/config')
+// const unique = require('mongoose-unique-validator')
+// const env = require('../startup/config')
 //const conn = require("../db/conn").connect('users');
-const { emailRegex } = require('../utils/patterns');
+// const { emailRegex } = require('../utils/patterns');
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -16,81 +16,81 @@ const userSchema = new mongoose.Schema({
         type: String,
         minLength: 5,
         maxLength: 50,
-        reuired: true,
+        required: true,
     },
     profilePicture: {
         type: String,
     },
     email: {
         type: String,
-        match: emailRegex,
         required: true,
         unique: true,
     },
-    passwordHash: {
+    password: {
         type: String,
         required: true
     },
-    recipes: {
-        type: [{
-            id: {
-              type: mongoose.Schema.Types.ObjectId,
-              required: true,
-            }
-          }],
-          required: true,
-          default: []
-    },
-    savedRecipes: {
-        type: [{
-            id: {
-              type: mongoose.Schema.Types.ObjectId,
-              required: true,
-            }
-          }],
-          required: true,
-          default: []    
-    },
-    createdRecipes: {
-        type: [{
-            id: {
-              type: mongoose.Schema.Types.ObjectId,
-              required: true,
-            }
-          }],
-          required: true,
-          default: []    
-    },
-    // name of meal: String
-    // serving size
-    // serving name
-    // numServings
-    mealslogged: {
-      type: [{
-          id: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-          },
+  //   recipes: {
+  //       type: [{
+  //           id: {
+  //             type: mongoose.Schema.Types.ObjectId,
+  //             required: true,
+  //           }
+  //         }],
+  //         required: true,
+  //         default: []
+  //   },
+  //   savedRecipes: {
+  //       type: [{
+  //           id: {
+  //             type: mongoose.Schema.Types.ObjectId,
+  //             required: true,
+  //           }
+  //         }],
+  //         required: true,
+  //         default: []    
+  //   },
+  //   createdRecipes: {
+  //       type: [{
+  //           id: {
+  //             type: mongoose.Schema.Types.ObjectId,
+  //             required: true,
+  //           }
+  //         }],
+  //         required: true,
+  //         default: []    
+  //   },
+  //   // name of meal: String
+  //   // serving size
+  //   // serving name
+  //   // numServings
+  //   mealslogged: {
+  //     type: [{
+  //         id: {
+  //           type: mongoose.Schema.Types.ObjectId,
+  //           required: true,
+  //         },
           
-        }],
-        required: true,
-        default: []    
-  }
+  //       }],
+  //       required: true,
+  //       default: []    
+  // }
 });
+// ,{ collection: "user" }
 
-userSchema.plugin(unique);
+// userSchema.plugin(unique);
 
-// https://stackoverflow.com/questions/9952649/convert-mongoose-docs-to-json
-userSchema.set('toJSON', {
-    transform: (doc, object) => {
-      object.id = object._id.toString();
-      //   object.verified = 'verification' in object ? false : true;
+// // https://stackoverflow.com/questions/9952649/convert-mongoose-docs-to-json
+// userSchema.set('toJSON', {
+//     transform: (doc, object) => {
+//       object.id = object._id.toString();
+//       //   object.verified = 'verification' in object ? false : true;
   
-      delete object.passwordHash;
-      delete object._id;
-      delete object.__v;
-    }
-  });
+//       delete object.passwordHash;
+//       delete object._id;
+//       delete object.__v;
+//     }
+//   });
 
-  const User = conn.model("User", userSchema);
+  const User = mongoose.model("User", userSchema);
   module.exports = User;

@@ -75,22 +75,12 @@ const userSchema = new mongoose.Schema({
   //       required: true,
   //       default: []    
   // }
-});
+}, 
+{collection: "users"});
 // ,{ collection: "user" }
 
-// userSchema.plugin(unique);
 
-// // https://stackoverflow.com/questions/9952649/convert-mongoose-docs-to-json
-// userSchema.set('toJSON', {
-//     transform: (doc, object) => {
-//       object.id = object._id.toString();
-//       //   object.verified = 'verification' in object ? false : true;
-  
-//       delete object.passwordHash;
-//       delete object._id;
-//       delete object.__v;
-//     }
-//   });
+
 
   const User = mongoose.model("User", userSchema);
   module.exports = User;

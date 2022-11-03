@@ -12,12 +12,6 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    displayName: {
-        type: String,
-        minLength: 5,
-        maxLength: 50,
-        required: true,
-    },
     profilePicture: {
         type: String,
     },
@@ -30,51 +24,47 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-  //   recipes: {
-  //       type: [{
-  //           id: {
-  //             type: mongoose.Schema.Types.ObjectId,
-  //             required: true,
-  //           }
-  //         }],
-  //         required: true,
-  //         default: []
-  //   },
-  //   savedRecipes: {
-  //       type: [{
-  //           id: {
-  //             type: mongoose.Schema.Types.ObjectId,
-  //             required: true,
-  //           }
-  //         }],
-  //         required: true,
-  //         default: []    
-  //   },
-  //   createdRecipes: {
-  //       type: [{
-  //           id: {
-  //             type: mongoose.Schema.Types.ObjectId,
-  //             required: true,
-  //           }
-  //         }],
-  //         required: true,
-  //         default: []    
-  //   },
-  //   // name of meal: String
-  //   // serving size
-  //   // serving name
-  //   // numServings
-  //   mealslogged: {
-  //     type: [{
-  //         id: {
-  //           type: mongoose.Schema.Types.ObjectId,
-  //           required: true,
-  //         },
+    recipes: {
+        type: [{
+            id: {
+              type: mongoose.Schema.Types.ObjectId,
+              required: true,
+            }
+          }],
+          required: true,
+          default: []
+    },
+    savedRecipes: {
+        type: [{
+            id: {
+              type: mongoose.Schema.Types.ObjectId,
+              required: true,
+            }
+          }],
+          required: true,
+          default: []    
+    },
+    createdRecipes: {
+        type: [{
+            id: {
+              type: mongoose.Schema.Types.ObjectId,
+              required: true,
+            }
+          }],
+          required: true,
+          default: []    
+    },
+    mealslogged: {
+      type: [{
+          id: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+          },
           
-  //       }],
-  //       required: true,
-  //       default: []    
-  // }
+        }],
+        required: true,
+        default: []    
+  }
 }, 
 {collection: "users"});
 // ,{ collection: "user" }

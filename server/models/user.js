@@ -12,12 +12,6 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    displayName: {
-        type: String,
-        minLength: 5,
-        maxLength: 50,
-        required: true,
-    },
     profilePicture: {
         type: String,
     },

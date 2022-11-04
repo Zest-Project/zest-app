@@ -1,51 +1,61 @@
-const jwt = require("jsonwebtoken");
-var express = require('express');
-var router = express.Router();
-const bycrypt = require("bcrypt")
-const JWT_SECRET = "9FpBFd*eF*z2?4X!dA%Pdp/})Y&-B[$;"
+// const jwt = require("jsonwebtoken");
+let express = require("express");
+let router = express.Router();
+const bcrypt = require("bcryptjs");
+const jwt = require("../utils/jwt");
 
 const User = require("../models/user");
 
-
-
 router.post("/", async (request, response) => {
-    const hashed_password = await bycrypt.hash(request.body.password, 10);
+  if (!request.body) {
+    errors.push("no request body");
+  }
+  const { username, email, password } = request.body;
 
-    const body = request.body;
-    console.log("navigating to signup");
-    console.log(body);
-       
-    if (!body) {
-        errors.push("no request body");
-    }
-    let errors = []
-    if (await User.exists({username: body.username})) {
-        errors.push("username exists");
-    }
-    if (body.username.length < 5 || body.username.length > 50) {
-        errors.push("username must be between 5 and 50 characters.")
-    }
-    if (await User.exists({email: body.email})) {
-        errors.push("email exists");
-    }
-    if (errors.length > 0) {
-        return response.send({status: "error", errors: errors})
-    }
+  console.log("navigating to signup");
+  console.log(username + " " + email + " " + password);
 
-    await User.create({
-        username: body.username,
-        displayName: body.displayName,
-        email: body.email,
-        password: body.password,
+  let errors = [];
+  if (await User.exists({ username: username })) {
+    errors.push("username exists");
+  }
+  if (username.length < 5 || username.length > 50) {
+    errors.push("username must be between 5 and 50 characters.");
+  }
+  if (await User.exists({ email: email })) {
+    errors.push("email exists");
+  }
+  if (errors.length > 0) {
+    return response.send({ status: "error", errors: errors });
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  const hashed_password = await bcrypt.hash(password, salt);
+
+  const user = await User.create({
+    username: username,
+    email: email,
+    password: hashed_password,
+  });
+
+  if (user) {
+    return response.send({
+      status: "ok",
+      _id: user.id,
+      username: user.username,
+      token: jwt.signToken(user.username, user.id),
     });
-    const token = jwt.sign({
-        username: body.username,
-        email: body.email,
-    },
-    JWT_SECRET
-    );
+  } else {
+    errors.push("user not created");
+    return response.send({ status: "error", errors: errors });
+  }
 
-    return response.send({status: "ok"});
+  // const token = jwt.sign({
+  //     username: body.username,
+  //     email: body.email,
+  // },
+  // process.env.JWT_SECRET
+  // );
 });
 
 // router.get("/", (request, response) => {
@@ -58,5 +68,4 @@ router.post("/", async (request, response) => {
 
 // });
 
-
-module.exports = router
+module.exports = router;

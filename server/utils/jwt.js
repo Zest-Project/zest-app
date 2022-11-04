@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const env = require('../startup/config');
+// const env = require('../startup/config');
 
 /**
  * signs a token
@@ -9,9 +9,9 @@ const env = require('../startup/config');
  * @param id
  * @returns {jwt.Token}
  */
-const signToken = (username, email, id, tokenId) => {
-  const userForToken = { username, email, id, tokenId };
-  return jwt.sign(userForToken, env.JWT_SECRET);
+const signToken = (username, id) => {
+  const userForToken = { username, id};
+  return jwt.sign(userForToken, process.env.JWT_SECRET);
 };
 
 /**
@@ -23,7 +23,7 @@ const signToken = (username, email, id, tokenId) => {
 const verifyToken = (token) => {
 
   try {
-    return jwt.verify(token, env.JWT_SECRET);
+    return jwt.verify(token, process.env.JWT_SECRET);
 
   } catch (e) {
     return false;

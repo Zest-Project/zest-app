@@ -1,4 +1,4 @@
-const env = require('../startup/config');
+// const env = require('../startup/config');
 
 /**
  * logs info
@@ -7,7 +7,7 @@ const env = require('../startup/config');
  */
 const info = (...params) => {
 
-  if (env.NODE_ENV !== 'test') {
+  if (process.env.NODE_ENV !== 'test') {
     console.log(...params);
   }
 };
@@ -18,7 +18,7 @@ const info = (...params) => {
  * @param params
  */
 const error = (...params) => {
-  if (env.NODE_ENV !== 'test') {
+  if (process.env.NODE_ENV !== 'test') {
     console.error(...params);
   }
 };

@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+require('dotenv').config();
 // const cors = require("cors");
 
 
@@ -10,7 +11,7 @@ const app = express();
 
 const port = process.env.PORT || 5001;
 // const dbo = require("./startup/conn");
-require('./startup/config')();
+// require('./startup/config')();
 require('./startup/routes')(app);
 require('./startup/conn')();
 

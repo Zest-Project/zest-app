@@ -3,8 +3,9 @@ import AddImage from './AddImage';
 import Grid from "@mui/material/Grid";
 //import PageTitle from "./PageTitle";
 import "../scss/styles";
-import { useAuth } from "../context/AuthProvider";
+import AuthContext from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 const defaultValues = {
   username: "",
   email: "",
@@ -14,7 +15,7 @@ const defaultValues = {
 
 const SignupComponent = () => {
   const [formValues, setFormValues] = useState(defaultValues);
-  const { onSignup } = useAuth();
+  const authContext = useContext(AuthContext)
 
   const navigate = useNavigate();
   const routeChange = () => {
@@ -28,10 +29,16 @@ const SignupComponent = () => {
       [name]: value,
     });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    authContext.onSignup(formValues.username, formValues.password, formValues.email);
+  };
+
   return (
     <div className="sign_up">
       
-      <form className="signup-form" onSubmit={onSignup}>
+      <form className="signup-form" onSubmit={handleSubmit}>
         <Grid className="container" container direction="column" spacing={3}>
           
           <label className="title">Sign Up</label>
@@ -42,7 +49,7 @@ const SignupComponent = () => {
               <input
                 type="text"
                 className="input"
-                name="name"
+                name="username"
                 // placeholder='username'
                 onChange={handleInputChange}
               />
@@ -55,7 +62,7 @@ const SignupComponent = () => {
               <input
                 type="email"
                 className="input"
-                name="name"
+                name="email"
                 // placeholder='password'
                 onChange={handleInputChange}
               />
@@ -68,7 +75,7 @@ const SignupComponent = () => {
               <input
                 type="password"
                 className="input"
-                name="name"
+                name="password"
                 // placeholder='password'
                 onChange={handleInputChange}
               />

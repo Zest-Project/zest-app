@@ -54,42 +54,25 @@ router.post("/", async (request, response) => {
   }
 });
 
-// router.get("/", async (request, response) => {
+router.get("/", async (request, response) => {
+    const user = request.user;
 
-//     if (!request.params) {
-//       errors.push("no recipe id");
-//     }
-//     const { recipe_id } = request.params;
+    console.log("navigating to recipes");
+    const usr = await User.findById(user._id);
 
-//     console.log("navigating to recipe");
-//     console.log(recipe_id);
+    let errors = [];
+    if (usr) {
+    //   const recipes = Recipe.findById
+      const allRecipes = await Recipe.find({ _id : { $in: usr.createdRecipes }});
+      return response.status(200).send({
+        status: "ok",
+        recipes: allRecipes,
+      });
+    } else {
+      errors.push("recipes not found");
+      return response.status(400).send({ status: "error", errors: errors });
+    }
 
-//     let errors = [];
-//     if (await Recipe.exists({ recipename: recipename })) {
-//       errors.push("recipename exists");
-//     }
-//     if (recipename.length < 5 || recipename.length > 50) {
-//       errors.push("recipename must be between 5 and 50 characters.");
-//     }
-//     if (errors.length > 0) {
-//       return response.send({ status: "error", errors: errors });
-//     }
-
-//     const recipe = await Recipe.create({
-//       recipename: recipename,
-//     });
-
-//     if (recipe) {
-//       return response.send({
-//         status: "ok",
-//         _id: recipe.id,
-//         recipename: recipe.recipename,
-//       });
-//     } else {
-//       errors.push("recipe not created");
-//       return response.send({ status: "error", errors: errors });
-//     }
-
-// });
+});
 
 module.exports = router;

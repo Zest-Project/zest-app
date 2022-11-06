@@ -3,7 +3,7 @@ import "./scss/styles";
 import { Grid } from "@mui/material";
 import AppRouter from "./AppRouter";
 import NavBar from "./components/NavBar";
-import { useAuth } from "./context/AuthProvider";
+import AuthContext from "./context/AuthProvider";
 // import { Outlet } from "react-router-dom";
 // import { AuthProvider } from "./context/useAuth";
 // import { Navigate } from "react-router-dom";
@@ -13,9 +13,11 @@ import { useAuth } from "./context/AuthProvider";
 import {
   Navigate,
 } from 'react-router-dom';
+import { useContext } from "react";
 
 const App = () => {
-  const { token } = useAuth();
+  const authContext = useContext(AuthContext);
+  const  token  = authContext.token;
 
   if(!token) {
     <Navigate to="/login" replace/>

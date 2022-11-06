@@ -9,13 +9,15 @@ import {
 // import AppRouter from "../AppRouter";
 // import { Grid } from "@mui/material";
 // import AppRouter from "../AppRouter";
-import { useAuth } from "../context/AuthProvider";
+import AuthContext from "../context/AuthProvider";
+import { useContext } from "react";
 import PropTypes from 'prop-types'
 
 // import AppRouter from "../AppRouter";
 const ProtectedLayout = ({children}) => {
   // const token = useContext(AuthContext);
-  const {token} = useAuth();
+  const authContext = useContext(AuthContext)
+  const token = authContext.token;
   // const { user } = useAuth();
   // const outlet = useOutlet();
 

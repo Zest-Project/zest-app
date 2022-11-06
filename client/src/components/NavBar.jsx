@@ -10,12 +10,14 @@ import logo from "../images/logo.png";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 // import "../scss/styles";
-import { useAuth } from "../context/AuthProvider";
+import AuthContext from "../context/AuthProvider";
+import { useContext } from "react";
 // import { Button } from "@mui/material";
 
 const NavBar = () => {
   // const { user, logout } = useAuth();
-  const { token, onLogout } = useAuth();
+  const authContext = useContext(AuthContext)
+  const token = authContext.token;
   // const {  } = useAuth();
 
   return (
@@ -98,7 +100,7 @@ const NavBar = () => {
           // <button type="button" onClick={onLogout}>
           //   Log Out
           // </button>
-          <div className="navitem logout" onClick={onLogout}>
+          <div className="navitem logout" onClick={authContext.onLogout}>
             <div className="content">
               <ExitToAppIcon className="icon" />
               <p> Logout </p>

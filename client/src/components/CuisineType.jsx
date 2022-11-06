@@ -1,7 +1,8 @@
 import React from "react";
 import RecipePreview from "./RecipePreview";
+import PropTypes from 'prop-types'
 import "../scss/styles";
-import data from "../recipeListData.json";
+// import data from "../recipeListData.json";
 import { useRef } from "react";
 import LeftArrow from "./arrows/LeftArrow";
 import RightArrow from "./arrows/RightArrow";
@@ -9,7 +10,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 // import { useEffect } from "react";
 
-const CuisineType = () => {
+const CuisineType = ({recipes, cuisineType}) => {
   const sliderRef = useRef(null)
   const [left, setLeft] = useState(0);
   const [right, setRight] = useState(0);
@@ -33,6 +34,8 @@ const CuisineType = () => {
     // console.log("scrolling right: " + right);
   }, [right]);
 
+  console.log("cuisinetype: " +  cuisineType + " recipes: " + recipes);
+
   return (
     <div className="cuisine_type container ">
       <div className="cuisine_name ">CuisineType</div>
@@ -42,8 +45,8 @@ const CuisineType = () => {
         <div  onClick={handleLeft}> <LeftArrow/> </div>
         </div>
         <div ref={sliderRef} id="slider" className="scroll_bar">
-          {data.recipeNames.map((d, i) => (
-            <RecipePreview recipeName={d} key={i} />
+          {recipes.map((d) => (
+            <RecipePreview recipeName={d.recipename} key={cuisineType._id} />
           ))}
         </div>
         <div>
@@ -53,5 +56,10 @@ const CuisineType = () => {
     </div>
   );
 };
+
+CuisineType.propTypes = {
+  recipes: PropTypes.arrayOf(PropTypes.object),
+  cuisineType: PropTypes.string
+}
 
 export default CuisineType;

@@ -1,11 +1,15 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import axios from "axios";
 import PropTypes from 'prop-types'
-import fakeAuth from "../Authentication";
+// import fakeAuth from "../Authentication";
 import { useNavigate } from "react-router-dom";
 // import useLocalStorage from "../hooks/useLocalStorage"
 
-const AuthContext = createContext(null);
+const AuthContext = createContext({
+  onSignup: () => { },
+  onLogin: () => { },
+  onLogout: () => { }
+});
 
 const validateHistoryToken = () => {
   //vaidate token from database
@@ -16,69 +20,78 @@ const validateHistoryToken = () => {
   return historyToken;
 }
 
-export const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   // const [authToken, setAuthToken] = useLocalStorage("token", null);
   const [token, setToken] = useState( validateHistoryToken() || "");
   const navigate = useNavigate();
 
-  if(token) {
-    validateHistoryToken(token);
-  }
+  // if(token) {
+  //   validateHistoryToken(token);
+  // }
 
-  const handleSignup = async (data) => {
-    data.preventDefault();
-    const username = data.target[1].value;
-    const email = data.target[2].value;
-    const password = data.target[3].value;
+  const onSignup = async (username, password, email) => {
+    // data.preventDefault();
+    // const username = data.target[1].value;
+    // const email = data.target[2].value;
+    // const password = data.target[3].value;
+    let token;
     //const confirm_pass = data.target[3].value;
+    console.log(`username: ${username} + password: ${password} + email: ${email}`); 
 
     await axios.post("/api/signup", {
       username: username,
       email: email,
       password: password
     })
-
-    .then(function (response) {
-      console.log(response);
+    .then((response) => {
+      console.log(response.data.token);
+      token = response.data.token;
+      setToken(token)
     })
     .catch(function (error) {
       console.log(error);
     });
-    const token = await fakeAuth(username, password);
-    localStorage.setItem("token", JSON.stringify(token));
-    setToken(token);
+    // const token = await fakeAuth(username, password);
+    localStorage.setItem("token", token);
+    // setToken(token);
     navigate("/");
 
   }
 
-  const handleLogin = async (data) => {
-    data.preventDefault();
-    const username = data.target[0].value;
-    const password = data.target[1].value
-    
-    const token = await fakeAuth(username, password); // pass data here when needed
+  const onLogin = async (username, password) => {
+    // data.preventDefault();
+    // const username = data.target[0].value;
+    // const password = data.target[1].value;
+    let token;
+    console.log(`username: ${username} + password: ${password}`); 
+    // const token = await fakeAuth(username, password); // pass data here when needed
+    await axios.post("/api/login", {
+      username: username,
+      password: password
+    })
+    .then((response) => {
+      console.log(response.data.token);
+      token = response.data.token;
+      setToken(token);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
-    localStorage.setItem("token", JSON.stringify(token));
-    setToken(token);
+    localStorage.setItem("token", token);
+    // setToken(token);
     navigate("/");
     
   };
 
-  const handleLogout = () => {
+  const onLogout = () => {
     localStorage.removeItem("token");
     setToken(null);
     navigate("/login");
   };
 
-  const value = {
-    token,
-    onLogin: handleLogin,
-    onLogout: handleLogout,
-    onSignup: handleSignup,
-  };
-
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{token, onSignup, onLogin, onLogout}}>
       {children}
     </AuthContext.Provider>
   );
@@ -88,9 +101,7 @@ AuthProvider.propTypes = {
   children: PropTypes.object
 }
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export default AuthContext;
 
-export default  AuthProvider;
+export { AuthProvider };
 

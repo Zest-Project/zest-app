@@ -36,7 +36,7 @@ const AddRecipe = () => {
           />
         </label>
 
-        <button className="btn" type="submit" value="Submit">
+        <button className="button" type="submit" value="Submit">
           Submit
         </button>
       </form>

@@ -1,0 +1,25 @@
+@use "../variables" as v;
+
+.add_recipe button {
+  text-decoration: none; // get rid of default link decoration
+  color: inherit; // get rid of default link color
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: fit-content;
+  background-color: v.$light_forest_green;
+  border-radius: 0.75rem;
+  border: none;
+  font-family: v.$lato;
+  font-size: v.$medium;
+  font-weight: v.$normal;
+
+  // width: fit-content;
+  margin-top: 1.5rem;
+}
+
+.add_recipe button:hover {
+  color: v.$light_forest_green;
+  background-color: v.$light_olive_green;
+}

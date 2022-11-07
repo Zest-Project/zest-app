@@ -5,6 +5,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { AuthProvider } from "./context/AuthProvider";
+import { RecipeProvider } from "./context/RecipeProvider";
 import { UserProvider } from "./context/UserProvider";
 import "./scss/styles";
 
@@ -16,7 +17,9 @@ root.render(
     <BrowserRouter>
       <AuthProvider>
         <UserProvider>
-          <App />
+          <RecipeProvider>
+            <App />
+          </RecipeProvider>
         </UserProvider>
       </AuthProvider>
     </BrowserRouter>

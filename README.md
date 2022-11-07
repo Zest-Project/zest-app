@@ -32,7 +32,7 @@ final project for CS 348
 
   if on a branch run: 
   
-  git push heroku <branchname>:main 
+  git push heroku branchname:main 
   
   else 
   

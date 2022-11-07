@@ -23,7 +23,9 @@ final project for CS 348
   
     => npm install
 
-    => npm run dev (runs nodemon so you don't have the retart the server with each change)
+    => npm run dev 
+  
+  (runs nodemon so you don't have the retart the server with each change)
   
   
 

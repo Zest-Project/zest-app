@@ -1,8 +1,9 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import axios from "axios";
 import PropTypes from 'prop-types'
 // import fakeAuth from "../Authentication";
 import { useNavigate } from "react-router-dom";
+import LoadingContext from "./LoadingProvider";
 // import useLocalStorage from "../hooks/useLocalStorage"
 
 const AuthContext = createContext({
@@ -22,6 +23,7 @@ const validateHistoryToken = () => {
 
 const AuthProvider = ({ children }) => {
   // const [authToken, setAuthToken] = useLocalStorage("token", null);
+  const loadingContext = useContext(LoadingContext);
   const [token, setToken] = useState( validateHistoryToken() || "");
   const navigate = useNavigate();
 
@@ -38,6 +40,7 @@ const AuthProvider = ({ children }) => {
     //const confirm_pass = data.target[3].value;
     console.log(`username: ${username} + password: ${password} + email: ${email}`); 
 
+    loadingContext.setLoading(true)
     await axios.post("/api/signup", {
       username: username,
       email: email,
@@ -55,6 +58,7 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem("token", token);
     // setToken(token);
     navigate("/");
+    loadingContext.setLoading(false);
 
   }
 
@@ -65,6 +69,7 @@ const AuthProvider = ({ children }) => {
     let token;
     console.log(`username: ${username} + password: ${password}`); 
     // const token = await fakeAuth(username, password); // pass data here when needed
+    loadingContext.setLoading(true)
     await axios.post("/api/login", {
       username: username,
       password: password
@@ -81,13 +86,16 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem("token", token);
     // setToken(token);
     navigate("/");
+    loadingContext.setLoading(false)
     
   };
 
   const onLogout = () => {
+    loadingContext.setLoading(true)
     localStorage.removeItem("token");
     setToken(null);
     navigate("/login");
+    loadingContext.setLoading(false);
   };
 
   return (

@@ -5,6 +5,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { AuthProvider } from "./context/AuthProvider";
+import { LoadingProvider } from "./context/LoadingProvider";
 import { RecipeProvider } from "./context/RecipeProvider";
 import { UserProvider } from "./context/UserProvider";
 import "./scss/styles";
@@ -15,13 +16,15 @@ const root = createRoot(rootElement);
 root.render(
   <StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <UserProvider>
-          <RecipeProvider>
-            <App />
-          </RecipeProvider>
-        </UserProvider>
-      </AuthProvider>
+      <LoadingProvider>
+        <AuthProvider>
+          <UserProvider>
+            <RecipeProvider>
+              <App />
+            </RecipeProvider>
+          </UserProvider>
+        </AuthProvider>
+      </LoadingProvider>
     </BrowserRouter>
   </StrictMode>
 );

@@ -9,18 +9,20 @@ import AuthContext from "../context/AuthProvider";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
+import LoadingContext from "../context/LoadingProvider";
 
 const Explore = () => {
   // const {getRecipes} = useUser();
   const userContext = useContext(UserContext);
   // const {token} = useAuth();
   const authContext = useContext(AuthContext);
+  const loadingContext = useContext(LoadingContext);
   // const [token, setToken] = useState(0);
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // setLoading(true);
+    loadingContext.setLoading(true);
     const getRecipes = async () => {
       await userContext.getRecipes().then((response) => {
         // console.log(`response: ${response}`);
@@ -36,7 +38,7 @@ const Explore = () => {
       })
     }
     getRecipes()
-    setLoading(false);
+    loadingContext.setLoading(false);
   }, [authContext.token])
 
   useEffect(() => {
@@ -49,13 +51,12 @@ const Explore = () => {
           <PageTitle pageTitle="Explore"/> 
           <SearchRecipes />
         </div>
-        {loading && <LoadingComponent/>}
-        {!loading && 
+        
         <div>
             <CuisineType recipes={recipes} cuisineType="hello"/>
             <CuisineType recipes={recipes} cuisineType="hello"/>
             <CuisineType recipes={recipes} cuisineType="hello"/>
-        </div>}
+        </div>
         
     </div>
   )

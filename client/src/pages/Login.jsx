@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import LoginComponent from '../components/LoginComponent'
+import LoadingContext from '../context/LoadingProvider';
 import background from '../images/login_hero.jpeg'
 import '../scss/styles';
 

@@ -1,23 +1,29 @@
 # CS-348-Final-Project
 final project for CS 348
 
-=> Clone zest directory
+  Clone zest directory
+    
+    => git clone https://github.com/Zest-Project/zest-app.git
 
 # To run app locally: 
-
-  => cd client
   
-  => npm install
-  
-  => npm start
+  In one terminal: 
 
-  => cd server
+    => cd client
+
+    => npm install
+
+    => npm start
+    
+  In another terminal:  
+
+    => cd server
   
   create a new file ".env" in server directory and copy content from "Env File" on google docs into it
   
-  => npm install
-  
-  => npm run dev
+    => npm install
+
+    => npm run dev (runs nodemon so you don't have the retart the server with each change)
   
   
 
@@ -30,15 +36,17 @@ final project for CS 348
 
       => heroku login 
 
-      (enter your email and heroku password when prompted to on the website)
+    (enter your email and heroku password when prompted to on the website)
 
       => git add .
 
       => git commit -am "commit message + pushing to heroku"
 
-      if you create new env variables run: 
+    if you create new env variables run: 
 
-      => heroku config:set NEW_ENV_VARIABLE_NAME="new_env_variable_value" or add using gui on the website under settings for the app in config variables
+      => heroku config:set NEW_ENV_VARIABLE_NAME="new_env_variable_value" 
+      
+    or add using gui on the heroku website under settings for the app in config variables
   
    *To Deploy Automatically, from main branch run: 
   
@@ -46,11 +54,11 @@ final project for CS 348
 
    *To Deploy Manually:
 
-      if on a branch run: 
+    if on a branch run: 
 
       => git push heroku branchname:main 
 
-      else 
+    else 
 
       => git push heroku main
   

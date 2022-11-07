@@ -1,14 +1,25 @@
 {
-    "name": "zest-app",
-    "version": "1.0.0",
-    "main": "",
-    "scripts": {
-        "start": "npm start --prefix server",
-        "install-client": "cd client && npm install && npm run build && cd ..",
-        "install-server": "cd server && npm install && cd .. ",
-        "heroku-postbuild": "npm run install-client && npm run install-server"
-    },
-    "engines": {
-        "node": "16.17.1"
-    }
+  "name": "zest",
+  "version": "1.0.0",
+  "description": "MERN app",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm start --prefix server",
+    "install-client": "cd client && npm install && npm run build && cd ..",
+    "install-server": "cd server && npm install && cd .. ",
+    "heroku-postbuild": "npm run install-client && npm run install-server"
+  },
+  "engines": {
+    "node": "16.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andreymshor/Zest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Andreymshor/Zest/issues"
+  },
+  "homepage": "https://github.com/Andreymshor/Zest#readme"
 }

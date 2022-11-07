@@ -21,9 +21,11 @@ final project for CS 348
 
 # to build and deploy
 
-  download heroku cli on your device
+  download heroku cli on your device (https://devcenter.heroku.com/articles/heroku-cli), then run: 
   
   cd Zest
+  
+  heroku login (enter zest gmail email and heroku password from env file when prompted to on the website)
   
   git add .
   

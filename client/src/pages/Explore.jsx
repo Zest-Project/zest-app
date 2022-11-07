@@ -1,4 +1,4 @@
-import Search from "../components/search/Search"
+import SearchRecipes from "../components/search/SearchRecipes"
 import React from 'react'
 import CuisineType from '../components/CuisineType'
 import PageTitle from '../components/PageTitle';
@@ -47,7 +47,7 @@ const Explore = () => {
     <div className='explore container'>
         <div className="header"> 
           <PageTitle pageTitle="Explore"/> 
-          <Search />
+          <SearchRecipes />
         </div>
         {loading && <LoadingComponent/>}
         {!loading && 

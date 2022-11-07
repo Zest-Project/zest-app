@@ -6,7 +6,7 @@ import data from "../../recipeData.json";
 import LoadingComponent from "../LoadingComponent";
 import { useRef } from "react";
 
-const Search = () => {
+const SearchRecipes = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
@@ -52,13 +52,6 @@ const Search = () => {
     if (searchParam.includes("ingredients")) {
       console.log("here in ingredients:");
       return items.filter((item) => {
-        // return searchParams.some((newItem) => {
-        //   return (
-        //     item[newItem].toString().toLowerCase().indexOf(query.toLowerCase()) >
-        //     -1
-        //   );
-        // });
-        // console.log(item.ingredients);
         if (item.ingredients.includes(filterParam)) {
           console.log("Here item.ingredient == filterPAram" + item.ingredients);
           return searchParam.some((newItem) => {
@@ -270,4 +263,4 @@ const Search = () => {
   }
 };
 
-export default Search;
+export default SearchRecipes;

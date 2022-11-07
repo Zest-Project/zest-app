@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Andreymshor/Zest.git"
+    "url": "git+https://github.com/Zest-Project/zest-app"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Andreymshor/Zest/issues"
+    "url": "https://github.com/Zest-Project/zest-app/issues"
   },
-  "homepage": "https://github.com/Andreymshor/Zest#readme"
+  "homepage": "https://github.com/Zest-Project/zest-app#readme"
 }

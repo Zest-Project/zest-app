@@ -5,6 +5,8 @@ Nutrition Analysis and Recipe Explorer CRUD app - final project for CS348
 # Clone zest directory
 
     => git clone https://github.com/Zest-Project/zest-app.git
+    
+    => cd zest-app
 
 # To run app locally: 
 

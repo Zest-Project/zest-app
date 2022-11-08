@@ -4,19 +4,28 @@ import { useState } from "react";
 import RecipeContext from "../context/RecipeProvider";
 import PageTitle from "../components/PageTitle";
 
+const defaultValues = {
+  recipename: "",
+  cuisineType: "",
+};
+
 const AddRecipe = () => {
-  const [recipename, setRecipename] = useState();
+  const [formValues, setFormValues] = useState(defaultValues);
   const recipeContext = useContext(RecipeContext);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setRecipename(value);
+    const {name, value} = e.target;
+        console.log(e.target.value);
+        setFormValues({
+            ...formValues,
+            [name]: value,
+        });;
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(recipename);
-    recipeContext.addRecipe(recipename);
+    console.log(`recipename: ${formValues.recipename} + cuisineType: ${formValues.cuisineType}`)
+    recipeContext.addRecipe(formValues.recipename, formValues.cuisineType);
 }
 
   return (
@@ -31,6 +40,17 @@ const AddRecipe = () => {
             type="text"
             className="input"
             name="recipename"
+            // placeholder='username'
+            onChange={handleInputChange}
+          />
+        </label>
+
+        <label>
+          <p> Cuisine Type: </p>
+          <input
+            type="text"
+            className="input"
+            name="cuisineType"
             // placeholder='username'
             onChange={handleInputChange}
           />

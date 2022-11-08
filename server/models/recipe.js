@@ -1,23 +1,41 @@
 const mongoose = require('mongoose');
-// const unique = require('mongoose-unique-validator')
-// const env = require('../startup/config')
-//const conn = require("../db/conn").connect('recipes');
-// const { emailRegex } = require('../utils/patterns');
 
 const recipeSchema = new mongoose.Schema({
-    recipename: {
+    recipeName: {
         type: String,
         minLength: 5,
         maxLength: 50,
         required: true,
-        unique: true
+        // unique: true
+    },
+    prepTime: {
+        type: Number,
+    },
+    cookTime: {
+        type: Number,
+    },
+    yield: {
+        type: Number,
+    },
+    instructions: {
+        type: [String],
+    },
+    image: {
+        type: String,
+    },
+    tags: {
+        type: [String],
+    },
+    cuisineType: {
+        type: String,
+        unique: true,
+    },
+    ingredients: {
+        type: [mongoose.Types.ObjectId],
     }
 }, 
 {collection: "recipes"});
 // ,{ collection: "recipe" }
 
-
-
-
-  const recipe = mongoose.model("recipe", recipeSchema);
-  module.exports = recipe;
+const recipe = mongoose.model("recipe", recipeSchema);
+module.exports = recipe;

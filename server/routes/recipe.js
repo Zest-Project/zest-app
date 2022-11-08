@@ -10,15 +10,18 @@ router.post("/", async (request, response) => {
   if (!request.body) {
     errors.push("no request body");
   }
+  // console.log(request.body.recipename);
+
   const { body, user } = request;
   const recipename = body.recipename;
+  const cuisineType = body.cuisineType;
 
   console.log("navigating to recipe");
   console.log(recipename);
 
   let errors = [];
-  if (await Recipe.exists({ recipename: recipename })) {
-    errors.push("recipename exists");
+  if (!recipename || !cuisineType) {
+    errors.push("incomplete info");
   }
   if (recipename.length < 5 || recipename.length > 50) {
     errors.push("recipename must be between 5 and 50 characters.");
@@ -31,7 +34,8 @@ router.post("/", async (request, response) => {
   }
 
   const recipe = await Recipe.create({
-    recipename: recipename,
+    recipeName: recipename,
+    cuisineType: cuisineType
   });
 
   if (recipe) {
@@ -45,6 +49,7 @@ router.post("/", async (request, response) => {
         status: "ok",
         _id: recipe.id,
         recipename: recipe.recipename,
+        cuisineType: recipe.cuisineType,
         username: user.username,
       });
     }

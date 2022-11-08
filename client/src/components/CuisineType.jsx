@@ -46,7 +46,7 @@ const CuisineType = ({recipes, cuisineType}) => {
         </div>
         <div ref={sliderRef} id="slider" className="scroll_bar">
           {recipes.map((d) => (
-            <RecipePreview recipeName={d.recipename} key={d._id} />
+            <RecipePreview recipeName={d.recipeName} key={d._id} />
           ))}
         </div>
         <div>

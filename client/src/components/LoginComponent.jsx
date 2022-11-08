@@ -23,7 +23,7 @@ const LoginComponent = () => {
     }
     const handleInputChange = (e) => {
         const {name, value} = e.target;
-        console.log(e.target);
+        // console.log(e.target);
         setFormValues({
             ...formValues,
             [name]: value,

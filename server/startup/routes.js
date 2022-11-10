@@ -6,6 +6,7 @@ const path = require("path");
 const signupEndpoint = require("../routes/signup");
 const loginEndpoint = require("../routes/login");
 const recipeEndpoint = require("../routes/recipe");
+const ingredientEndpoint = require("../routes/ingredient");
 const tokenVerifier = require('../middleware/tokenVerifier');
 
 let corsOptions = {
@@ -24,7 +25,7 @@ module.exports = function (app) {
     app.use("/api/signup", signupEndpoint);
     app.use("/api/login", loginEndpoint);
     app.use("/api/recipe", tokenVerifier, recipeEndpoint);
-
+    app.use("/api/ingredient", tokenVerifier, ingredientEndpoint);
 
     app.get("/", (request, response) => {
         response.send({message: "Welcome to Zest"})

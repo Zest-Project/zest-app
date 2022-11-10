@@ -80,4 +80,25 @@ router.get("/", async (request, response) => {
 
 });
 
+// router.get("/getIngredients", async (request, response) => {
+//   const user = request.user;
+//   const body = request.body;
+
+//   console.log("navigating to recipes/getIngredients");
+//   const allRecipes = await Recipe.find({ ingredients : { $in: body.ingredient }});
+
+//   let errors = [];
+//   if (allRecipes) {
+//   //   const recipes = Recipe.findById
+//     return response.status(200).send({
+//       status: "ok",
+//       recipes: allRecipes,
+//     });
+//   } else {
+//     errors.push("recipes not found");
+//     return response.status(400).send({ status: "error", errors: errors });
+//   }
+
+// });
+
 module.exports = router;

@@ -8,6 +8,13 @@ const recipeSchema = new mongoose.Schema({
         required: true,
         // unique: true
     },
+    description: {
+        type: String,
+        minLength: 5,
+        maxLength: 50,
+        required: true,
+        // unique: true
+    },
     prepTime: {
         type: Number,
     },

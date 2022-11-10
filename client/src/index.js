@@ -5,6 +5,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { AuthProvider } from "./context/AuthProvider";
+import { IngredientProvider } from "./context/IngredientProvider";
 import { LoadingProvider } from "./context/LoadingProvider";
 import { RecipeProvider } from "./context/RecipeProvider";
 import { UserProvider } from "./context/UserProvider";
@@ -20,7 +21,9 @@ root.render(
         <AuthProvider>
           <UserProvider>
             <RecipeProvider>
-              <App />
+              <IngredientProvider>
+                <App />
+              </IngredientProvider>
             </RecipeProvider>
           </UserProvider>
         </AuthProvider>

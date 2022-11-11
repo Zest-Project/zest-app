@@ -59,17 +59,17 @@ Nutrition Analysis and Recipe Explorer CRUD app - final project for CS348
   
   If the app builds: 
 
-      *To Deploy Automatically, from main branch run: 
+  *To Deploy Automatically, from main branch run: 
 
-        => git push origin main
+    => git push origin main
 
-      *To Deploy Manually:
+  *To Deploy Manually:
 
-      if on a branch run: 
+  if on a branch run: 
 
-        => git push heroku branchname:main 
+    => git push heroku branchname:main 
 
-      else 
+  else 
 
-        => git push heroku main
-  
+    => git push heroku main
+

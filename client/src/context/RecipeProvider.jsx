@@ -12,10 +12,12 @@ const RecipeProvider = ({children}) => {
     const authContext = useContext(AuthContext);
     const token = authContext.token;
 
-    const addRecipe = async (recipename, cuisineType) => {
+    const addRecipe = async (recipename, cuisineType, ingredients) => {
+      console.log(JSON.stringify(ingredients));
       await axios.post("/api/recipe", {
         recipename: recipename,
-        cuisineType: cuisineType
+        cuisineType: cuisineType,
+        ingredients: ingredients
       }, { headers: { "Authorization": `Bearer ${token}`} })
       .then((response) => {
         console.log(response.data);

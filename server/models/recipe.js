@@ -12,7 +12,7 @@ const recipeSchema = new mongoose.Schema({
         type: String,
         minLength: 5,
         maxLength: 50,
-        required: true,
+        // required: true,
         // unique: true
     },
     prepTime: {
@@ -35,7 +35,7 @@ const recipeSchema = new mongoose.Schema({
     },
     cuisineType: {
         type: String,
-        unique: true,
+        // unique: true,
     },
     ingredients: {
         type: [mongoose.Types.ObjectId],

@@ -2,6 +2,7 @@ let express = require("express");
 let router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("../utils/jwt");
+const mongoose = require("mongoose")
 
 const Recipe = require("../models/recipe");
 const User = require("../models/user");
@@ -15,9 +16,10 @@ router.post("/", async (request, response) => {
   const { body, user } = request;
   const recipename = body.recipename;
   const cuisineType = body.cuisineType;
+  const ingredients = body.ingredients.map((ingredient) => mongoose.Types.ObjectId(ingredient));
 
   console.log("navigating to recipe");
-  console.log(recipename);
+  console.log(recipename + "ingredients: " + JSON.stringify(ingredients));
 
   let errors = [];
   if (!recipename || !cuisineType) {
@@ -35,7 +37,8 @@ router.post("/", async (request, response) => {
 
   const recipe = await Recipe.create({
     recipeName: recipename,
-    cuisineType: cuisineType
+    cuisineType: cuisineType,
+    ingredients: ingredients
   });
 
   if (recipe) {

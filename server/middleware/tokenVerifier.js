@@ -31,7 +31,7 @@ const tokenVerifier = async (request, response, next) => {
     return;
   }
 
-  request.body.user = user;
+  // request.body.user = user;
   request.user = user;
   next();
 };

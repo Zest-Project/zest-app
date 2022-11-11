@@ -38,16 +38,19 @@ const CuisineType = ({recipes, cuisineType}) => {
 
   return (
     <div className="cuisine_type container ">
-      <div className="cuisine_name ">CuisineType</div>
+      <div className="cuisine_name "> CuisineType: {cuisineType} </div>
 
       <div className="cuisine_list" > 
         <div>
         <div  onClick={handleLeft}> <LeftArrow/> </div>
         </div>
         <div ref={sliderRef} id="slider" className="scroll_bar">
-          {recipes.map((d) => (
-            <RecipePreview recipeName={d.recipeName} key={d._id} />
-          ))}
+          {recipes.map((d) => {
+            if (d.cuisineType.toLowerCase() === cuisineType.toLowerCase()) {
+              return <RecipePreview recipeName={d.recipeName} key={d._id} />
+            }
+          }
+          )}
         </div>
         <div>
         <div onClick={handleRight}> <RightArrow /> </div>

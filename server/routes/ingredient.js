@@ -10,15 +10,15 @@ router.get("/", async (request, response) => {
   // const body = request.body;
 
   console.log("navigating to ingredeints");
-  const ingredeints = await Ingredient.find({});
+  const ingredients = await Ingredient.find({});
   // { _id : { $in: body.ingredeints }}
 
   let errors = [];
-  if (ingredeints) {
+  if (ingredients) {
   //   const recipes = Recipe.findById
     return response.status(200).send({
       status: "ok",
-      ingredeints: ingredeints,
+      ingredients: ingredients,
     });
   } else {
     errors.push("ingredeints not found");
@@ -27,12 +27,12 @@ router.get("/", async (request, response) => {
 
 });
 
-router.get("/getRecipes", async (request, response) => {
-  const body = request.body;
+router.get("/getRecipes/:ingredient_id", async (request, response) => {
+  const params = request.params;
 
-  console.log("navigating to ingredeints + " + body.ingredient);
+  console.log("navigating to ingredeints + " + params.ingredient_id);
   const ingredeints = await Ingredient.find({});
-  const recipes = await Recipe.find({ ingredients : mongoose.Types.ObjectId(body.ingredient) });
+  const recipes = await Recipe.find({ ingredients : mongoose.Types.ObjectId(params.ingredient_id) });
 
   // { _id : { $in: body.ingredeints }}
 

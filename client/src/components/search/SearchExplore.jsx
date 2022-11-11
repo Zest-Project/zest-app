@@ -8,6 +8,7 @@ import LoadingContext from "../../context/LoadingProvider";
 import { useRef } from "react";
 import RecipePreview from "../RecipePreview";
 import IngredientContext from "../../context/IngredientProvider";
+import CuisineType from "../CuisineType";
 
 const SearchExplore = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,31 +33,78 @@ const SearchExplore = () => {
   const authContext = useContext(AuthContext);
   const ingredientContext = useContext(IngredientContext);
   const loadingContext = useContext(LoadingContext);
+  const [cuisineTypes, setCuisineTypes] = useState();
   const [recipes, setRecipes] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const getIngredients = async () => {
+    await ingredientContext.getIngredients().then((response) => {
+      if (response) {
+        console.log("response in search explore: " + response.data.ingredients);
+        setIngredients(response.data.ingredients);
+      }
+      else {
+        console.log("error");
+      }
+    })
+  }
+
+  const getRecipes = async () => {
+    await userContext.getRecipes().then((response) => {
+      if (response) {
+        console.log("response in search explore: " + response.data.recipes);
+        setRecipes(response.data.recipes);
+      }
+      else {
+        console.log("error");
+      }
+    })
+  }
+
+  const getCuisineTypes = () => {
+    if (recipes) {
+      let tempCuisineTypes = recipes.map((recipe) => {
+        return recipe.cuisineType
+      })
+      setCuisineTypes([... new Set(tempCuisineTypes)]);
+    }
+  }
+
   useEffect(() => {
     loadingContext.setLoading(true);
-    const getRecipes = async () => {
-      await userContext.getRecipes().then((response) => {
-        if (response) {
-          console.log("response in search explore: " + response.data.recipes);
-          setRecipes(response.data.recipes);
-        }
-        else {
-          console.log("error");
-        }
-      })
-    }
-    getRecipes()
+    getRecipes();
+    getIngredients();
+    getCuisineTypes();
     loadingContext.setLoading(false);
   }, [authContext.token])
+
+  useEffect(() => {
+    getCuisineTypes();
+  }, [recipes])
+
+  useEffect(()=> {
+    if (query.length >= 1 && searchParam.includes("ingredients")) {
+      const newIngredients = ingredients.filter(ingredient => {
+        console.log("filter ingredient: " + ingredient.ingredientName);
+        return ingredient.ingredientName.includes(query);
+      })
+      setIngredients(newIngredients);
+      search(query);
+    }
+    else if (query.length >= 1 && searchParam.includes("dishName")) {
+      search(query);
+    }
+    else {
+      getRecipes();
+      getIngredients();
+    }
+  }, [query])
 
   let inputHandler = (e) => {
     //convert input text to lower case
     let lowerCase = e.target.value.toLowerCase();
     setQuery(lowerCase);
-    search(query);
   };
 
   const handleSelection = (item) => {
@@ -69,25 +117,72 @@ const SearchExplore = () => {
     console.log("here in search:");
     if (searchParam.includes("ingredients")) {
       console.log("here in ingredients:");
-      await ingredientContext.addRecipeByIngredient(query).then((response) => {
-        if (response) {
-          console.log("response in search explore: " + response.data.recipes);
-          setRecipes([...recipes,response.data.recipes]);
-        }
-        else {
-          console.log("error");
-        }
-      })
-      // return recipes;
-    }
-    if (searchParam.includes("dishName")) {
-      console.log("here in dishname:");
-
+  
+      console.log("ingredient: " + JSON.stringify(ingredients) + query);
+      
+      if(ingredients.length >= 1) {
+        await ingredientContext.getRecipeByIngredient(ingredients).then((response) => {
+          if (response) {
+            console.log("response in search explore: " + JSON.stringify(response.data.recipes));
+            setRecipes(response.data.recipes);
+          }
+          else {
+            console.log("error");
+            getRecipes();
+          }
+        })
+      }else {
+        console.log("error");
+        getRecipes();
+      }
+      return;
     }
     if (searchParam.includes("cuisineType")) {
       console.log("here in ingredients:");
+      const newRecipes = recipes.filter((recipe) => {
+        console.log("*****" + recipe.cuisineType + " " + query)
+        return recipe.cuisineType.toLowerCase().includes(query);
+      })
+      if (newRecipes) {
+        setRecipes(newRecipes);
+      }
+      else {
+        getRecipes();
+      }
+      return;
     }
-    return;
+    if (searchParam.includes("tags")) {
+      console.log("here in tags:");
+      const newRecipes = recipes.filter((recipe) => {
+        console.log("*****" + JSON.stringify(recipe.tags) + " " + query)
+        return recipe.tags.find(element => {
+          if (element.toLowerCase().includes(query)) {
+            return true;
+          }
+        });
+      })
+      if (newRecipes) {
+        setRecipes(newRecipes);
+      }
+      else {
+        getRecipes();
+      }
+      return;
+    }
+    if (searchParam.includes("dishName")) {
+      console.log("here in dishname:");
+      const newRecipes = recipes.filter((recipe) => {
+        console.log("*****" +recipe.recipeName + " " + query)
+        return recipe.recipeName.toLowerCase().includes(query);
+      })
+      if (newRecipes) {
+        setRecipes(newRecipes);
+      }
+      else {
+        getRecipes();
+      }
+      return;
+    }
   };
 
   useEffect(() => {
@@ -122,7 +217,7 @@ const SearchExplore = () => {
       ? searchParam.filter((currentItem) => currentItem !== e.target.value)
       : [...searchParam, e.target.value];
     setSearchParam(newSelection);
-    search();
+    // search();
   };
 
 
@@ -183,33 +278,9 @@ const SearchExplore = () => {
             </div>
           )}
         </div>
-        {searchParam == "ingredients" && (
-          <div>
-            <select
-              /*
-            // here we create a basic select input
-            // we set the value to the selected value
-            // and update the setFilterParam() state every time onChange is called
-            */
-              onChange={(e) => {
-                setFilterParam(e.target.value);
-              }}
-              className="custom_select"
-              aria-label="Filter Recipes By Ingredients"
-            >
-              <option value="All">Filter By Ingredients</option>
-              <option value="potato">Potato</option>
-              <option value="tomato">Tomato</option>
-              <option value="onion">Onion</option>
-              <option value="masalas">Masalas</option>
-              <option value="chick pea">Chick Pea</option>
-            </select>
-            {/* <span className="focus"></span> */}
-          </div>
-        )}
         <div>
-          <ul className="search_items_container">
-            {recipes.map((item) => (
+          {/* <ul className="search_items_container"> */}
+            {/* {recipes.map((item) => (
               <div
                 key={item._id}
                 className="search_items"
@@ -217,16 +288,18 @@ const SearchExplore = () => {
               >
                 <RecipePreview recipeName={item.recipeName} key={item._id} />
               </div>
-            ))}
-          </ul>
+            ))} */}
+            { cuisineTypes && cuisineTypes.map((cuisineType) => {
+              return <CuisineType recipes={recipes} cuisineType={cuisineType}/>
+            })}
+          {/* </ul> */}
         </div>
-        {/* <SearchList input={inputText} data={allTopics}/> */}
-        <div>
+        {/* <div>
           <p>Item Added:</p>
           <div>
             <p>{selectedItem && selectedItem.dishName}</p>
           </div>
-        </div>
+        </div> */}
       </div>
     );
 };

@@ -23,3 +23,13 @@
   color: v.$light_forest_green;
   background-color: v.$light_olive_green;
 }
+
+.add_recipe label {
+  color: v.$dark_forest_green;
+  font-size: v.$small;
+  font-family: v.$lato;
+  font-weight: v.$normal;
+  p {
+    margin-bottom: 0.5rem;
+  }
+}

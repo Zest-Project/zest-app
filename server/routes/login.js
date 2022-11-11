@@ -4,6 +4,7 @@ var router = express.Router();
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/user");
+const Recipe = require("../models/recipe");
 
 router.post("/", async (request, response) => {
   if (!request.body) {
@@ -16,9 +17,14 @@ router.post("/", async (request, response) => {
 
   let errors = [];
 
-  const user = await User.findOne({ username: username });
+  let getAllRecipes = await Recipe.find({ });
+  getAllRecipes.map((recipe) => recipe._id);
+  console.log(getAllRecipes);
+
+  const user = await User.findOneAndUpdate({ username: username }, { recipes: getAllRecipes});
 
   if (user && (await bcrypt.compare(password, user.password))) {
+    
     return response.send({
       status: "ok",
       _id: user.id,

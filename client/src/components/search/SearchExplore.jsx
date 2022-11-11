@@ -50,8 +50,8 @@ const SearchExplore = () => {
     })
   }
 
-  const getRecipes = async () => {
-    await userContext.getRecipes().then((response) => {
+  const getRecipes = async (searchComponent) => {
+    await userContext.getRecipes(searchComponent).then((response) => {
       if (response) {
         console.log("response in search explore: " + response.data.recipes);
         setRecipes(response.data.recipes);
@@ -67,13 +67,13 @@ const SearchExplore = () => {
       let tempCuisineTypes = recipes.map((recipe) => {
         return recipe.cuisineType
       })
-      setCuisineTypes([... new Set(tempCuisineTypes)]);
+      setCuisineTypes([...new Set(tempCuisineTypes)]);
     }
   }
 
   useEffect(() => {
     loadingContext.setLoading(true);
-    getRecipes();
+    getRecipes("allRecipes");
     getIngredients();
     getCuisineTypes();
     loadingContext.setLoading(false);
@@ -96,7 +96,7 @@ const SearchExplore = () => {
       search(query);
     }
     else {
-      getRecipes();
+      getRecipes("allRecipes");
       getIngredients();
     }
   }, [query])
@@ -133,7 +133,7 @@ const SearchExplore = () => {
         })
       }else {
         console.log("error");
-        getRecipes();
+        getRecipes("allRecipes");
       }
       return;
     }

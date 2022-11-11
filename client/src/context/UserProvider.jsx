@@ -15,8 +15,8 @@ const UserProvider = ({children}) => {
     const authContext = useContext(AuthContext);
     const token = authContext.token;
 
-  const getRecipes = async () => {
-    return await axios.get("/api/recipe", { headers: { "Authorization": `Bearer ${token}`} })
+  const getRecipes = async (searchComponent) => {
+    return await axios.get(`/api/recipe/${searchComponent}`, { headers: { "Authorization": `Bearer ${token}`} })
       .then((response) => {
         if(response.status === 200) {
             if(response.data.recipes.length >= 1) {

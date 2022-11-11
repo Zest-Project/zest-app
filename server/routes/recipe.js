@@ -46,6 +46,7 @@ router.post("/", async (request, response) => {
     newCreatedRecipes.push(recipe._id);
     const update_user = await User.findByIdAndUpdate(user._id, {
       createdRecipes: newCreatedRecipes,
+      recipes: [...user.recipes,recipe._id]
     });
     if (update_user) {
       return response.send({
@@ -62,16 +63,26 @@ router.post("/", async (request, response) => {
   }
 });
 
-router.get("/", async (request, response) => {
+router.get("/:search_component", async (request, response) => {
     const user = request.user;
+    const params = request.params;
 
-    console.log("navigating to recipes");
+    console.log("navigating to recipes + " + params.search_component);
     const usr = await User.findById(user._id);
 
     let errors = [];
     if (usr) {
     //   const recipes = Recipe.findById
-      const allRecipes = await Recipe.find({ _id : { $in: usr.createdRecipes }});
+      let allRecipes;
+      if (params.search_component == "createdRecipes") {
+        allRecipes = await Recipe.find({ _id : { $in: usr.createdRecipes }});
+      }
+      else if (params.search_component == "savedRecipes") {
+        allRecipes = await Recipe.find({ _id : { $in: usr.savedRecipes }});
+      }
+      else if (params.search_component == "allRecipes") {
+        allRecipes = await Recipe.find({ _id : { $in: usr.recipes }});
+      }
       return response.status(200).send({
         status: "ok",
         recipes: allRecipes,

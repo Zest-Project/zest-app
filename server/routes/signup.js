@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("../utils/jwt");
 
 const User = require("../models/user");
+const Recipe = require("../models/recipe");
 
 router.post("/", async (request, response) => {
   if (!request.body) {
@@ -32,10 +33,15 @@ router.post("/", async (request, response) => {
   const salt = await bcrypt.genSalt(10);
   const hashed_password = await bcrypt.hash(password, salt);
 
+  let getAllRecipes = await Recipe.find({ });
+  getAllRecipes.map((recipe) => recipe.id);
+  console.log(getAllRecipes);
+
   const user = await User.create({
     username: username,
     email: email,
     password: hashed_password,
+    recipes: getAllRecipes
   });
 
   if (user) {

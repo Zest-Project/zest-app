@@ -37,7 +37,7 @@ Nutrition Analysis and Recipe Explorer CRUD app - final project for CS348
   Download heroku cli on your device (https://devcenter.heroku.com/articles/heroku-cli),
   Create a heroku account, connect your github and your heroku accounts, let me add you as contributor to the project, then:  
 
-    => cd Zest
+    => cd zest-app
 
     => heroku login 
 
@@ -52,6 +52,12 @@ Nutrition Analysis and Recipe Explorer CRUD app - final project for CS348
     => heroku config:set NEW_ENV_VARIABLE_NAME="new_env_variable_value" 
 
   or add using gui on the heroku website under settings for the app in config variables
+  
+  *To test if the app builds, from zest-app run: 
+    
+    => heroku local
+  
+  If the app builds: 
 
   *To Deploy Automatically, from main branch run: 
 
@@ -66,4 +72,4 @@ Nutrition Analysis and Recipe Explorer CRUD app - final project for CS348
   else 
 
     => git push heroku main
-  
+

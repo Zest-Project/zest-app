@@ -43,12 +43,17 @@ router.post("/", async (request, response) => {
     // recipes: tempids
   });
 
-  const recipes = user.recipes;
+  let userRecipes = user.recipes;
   const getAllRecipes = await Recipe.find({ });
-  getAllRecipes.map((recipe) => {recipes.push(recipe._id)});
+  getAllRecipes.map((recipe) => {
+    // if (!userRecipes.indexOf(recipe._id) <= -1) {
+    //   console.log("here get all recipes in signup");
+      userRecipes.push(recipe._id);
+    // }
+  });
 
   const update_user = await User.findByIdAndUpdate(user._id, {
-    recipes: recipes
+    recipes: userRecipes
   });
 
 

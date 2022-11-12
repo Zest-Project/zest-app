@@ -53,7 +53,7 @@ const Explore = () => {
         </div>
         
         <div>
-            <SearchExplore/>
+            <SearchExplore searchComponent="allRecipes"/>
             {/* <CuisineType recipes={recipes} cuisineType="hello"/> */}
             {/* <CuisineType recipes={recipes} cuisineType="hello"/> */}
             {/* <CuisineType recipes={recipes} cuisineType="hello"/> */}

@@ -10,7 +10,7 @@ import RecipePreview from "../RecipePreview";
 import IngredientContext from "../../context/IngredientProvider";
 import CuisineType from "../CuisineType";
 
-const SearchExplore = () => {
+const SearchExplore = ({searchComponent}) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
@@ -50,7 +50,7 @@ const SearchExplore = () => {
     })
   }
 
-  const getRecipes = async (searchComponent) => {
+  const getRecipes = async () => {
     await userContext.getRecipes(searchComponent).then((response) => {
       if (response) {
         console.log("response in search explore: " + response.data.recipes);
@@ -73,7 +73,7 @@ const SearchExplore = () => {
 
   useEffect(() => {
     loadingContext.setLoading(true);
-    getRecipes("allRecipes");
+    getRecipes();
     getIngredients();
     getCuisineTypes();
     loadingContext.setLoading(false);

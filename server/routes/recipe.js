@@ -41,12 +41,24 @@ router.post("/", async (request, response) => {
     ingredients: ingredients
   });
 
+  // getAllRecipes.map((recipe) => {
+  //   if (!userRecipes.indexOf(recipe._id) <= -1) {
+  //     userRecipes.push(recipe._id);
+  //   }
+  // });
+
   if (recipe) {
-    const newCreatedRecipes = user.createdRecipes;
-    newCreatedRecipes.push(recipe._id);
+    let newCreatedRecipes = user.createdRecipes;
+    if (newCreatedRecipes.indexOf(recipe._id <= -1)) {
+      newCreatedRecipes.push(recipe._id);
+    }
+    let userRecipes = user.recipes;
+    if (userRecipes.indexOf(recipe._id <= -1)) {
+      userRecipes.push(recipe._id);
+    }
     const update_user = await User.findByIdAndUpdate(user._id, {
       createdRecipes: newCreatedRecipes,
-      recipes: [...user.recipes,recipe._id]
+      recipes: userRecipes
     });
     if (update_user) {
       return response.send({

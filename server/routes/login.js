@@ -17,13 +17,16 @@ router.post("/", async (request, response) => {
 
   let errors = [];
 
-  let getAllRecipes = await Recipe.find({ });
-  getAllRecipes.map((recipe) => recipe._id);
-  console.log(getAllRecipes);
+  const user = await User.findOne({username: username});
+  const recipes = user.recipes;
+  const getAllRecipes = await Recipe.find({ });
+  getAllRecipes.map((recipe) => {recipes.push(recipe._id)});
 
-  const user = await User.findOneAndUpdate({ username: username }, { recipes: getAllRecipes});
+  const update_user = await User.findByIdAndUpdate(user._id, {
+    recipes: recipes
+  });
 
-  if (user && (await bcrypt.compare(password, user.password))) {
+  if (user && update_user && (await bcrypt.compare(password, user.password))) {
     
     return response.send({
       status: "ok",

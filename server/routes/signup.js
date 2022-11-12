@@ -6,6 +6,7 @@ const jwt = require("../utils/jwt");
 
 const User = require("../models/user");
 const Recipe = require("../models/recipe");
+const { default: mongoose } = require("mongoose");
 
 router.post("/", async (request, response) => {
   if (!request.body) {
@@ -33,18 +34,25 @@ router.post("/", async (request, response) => {
   const salt = await bcrypt.genSalt(10);
   const hashed_password = await bcrypt.hash(password, salt);
 
-  let getAllRecipes = await Recipe.find({ });
-  getAllRecipes.map((recipe) => recipe.id);
-  console.log(getAllRecipes);
+  // console.log("here in signup all recipes " + getAllRecipes.map((recipe) => recipe._id));
 
   const user = await User.create({
     username: username,
     email: email,
     password: hashed_password,
-    recipes: getAllRecipes
+    // recipes: tempids
   });
 
-  if (user) {
+  const recipes = user.recipes;
+  const getAllRecipes = await Recipe.find({ });
+  getAllRecipes.map((recipe) => {recipes.push(recipe._id)});
+
+  const update_user = await User.findByIdAndUpdate(user._id, {
+    recipes: recipes
+  });
+
+
+  if (user && update_user) {
     return response.send({
       status: "ok",
       _id: user.id,

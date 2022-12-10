@@ -1,15 +1,31 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const ingredientSchema = new mongoose.Schema({
-    ingredientName: {
-        type: String,
-        minLength: 5,
-        maxLength: 50,
-        required: true,
-        unique: true
+const IngredientSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true, unique: true},
+    unit: String,
+    estimatedCost: {
+        value: Number,
+        unit: String
     },
-}, 
-{collection: "ingredients"});
+    image: String,
+    nutrition: {
+        nutrients: [{
+            name: String,
+            amount: Number,
+            unit: String,
+            percentOfDailyNeeds: Number
+        }],
+        caloricBreakdown: {
+            percentProtein: Number,
+            percentFat: Number,
+            percentCarbs: Number
+        }
+    }
+  },
+  { collection: "ingredients" }
+);
 
-const ingredient = mongoose.model("ingredient", ingredientSchema);
-module.exports = ingredient;
+const Ingredient = mongoose.model("Ingredient", IngredientSchema);
+
+module.exports = Ingredient;

@@ -9,6 +9,7 @@ const Login = () => {
   return (
     <div> 
       <div className="login_hero"> <img src={background} alt="login-hero"/></div>
+      <div> <h1> Helloo </h1></div>
       <div className="login_form"> <LoginComponent/> </div>
     </div>
 

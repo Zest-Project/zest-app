@@ -12,6 +12,7 @@ import LogMeal from "./pages/LogMeal";
 import MyRecipes from "./pages/MyRecipes";
 import Profile from "./pages/Profile";
 import LandingPage from "./pages/LandingPage";
+import RecipeDetail from "./pages/RecipeDetail"
 // import ProtectedRoute from "./components/ProtectedRoute";
 
 const AppRouter = () => {
@@ -32,6 +33,7 @@ const AppRouter = () => {
         <Route path="/logmeal" element={<LogMeal />} />
         <Route path="/myrecipes" element={<MyRecipes />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/RecipeDetail" element={<RecipeDetail />} />
       </Route> 
     </Routes>
   );

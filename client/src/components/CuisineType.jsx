@@ -46,9 +46,9 @@ const CuisineType = ({recipes, cuisineType}) => {
         </div>
         <div ref={sliderRef} id="slider" className="scroll_bar">
           {recipes.map((d) => {
-            if (d.cuisineType.toLowerCase() === cuisineType.toLowerCase()) {
+            if (d.cuisines[0].toLowerCase() === cuisineType.toLowerCase()) {
               
-              return <RecipePreview recipeName={d.recipeName} key={d._id} />
+              return <RecipePreview recipeName={d.name} key={d._id} />
             }
           }
           )}

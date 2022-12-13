@@ -31,7 +31,10 @@ const AddRecipe = () => {
         console.log("response in search explore: " + recipes);
         // setRecipes(response.data.recipes);
         if (recipes) {
-          let tempCuisineTypes = recipes.map((recipe) => recipe.cuisineType)
+          let tempCuisineTypes = [];
+          recipes.map((recipe) => {
+            recipe.cuisines.map((cuisineType) => {tempCuisineTypes.push(cuisineType)})
+          })
           setCuisineTypes([...new Set(tempCuisineTypes)]);
         }
       }

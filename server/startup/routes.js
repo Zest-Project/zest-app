@@ -24,7 +24,8 @@ module.exports = function (app) {
 
     app.use("/api/signup", signupEndpoint);
     app.use("/api/login", loginEndpoint);
-    app.use("/api/recipe", tokenVerifier, recipeEndpoint);
+    //app.use("/api/recipe", tokenVerifier, recipeEndpoint);
+    app.use("/api/recipe", recipeEndpoint);
     app.use("/api/ingredient", tokenVerifier, ingredientEndpoint);
 
     app.get("/", (request, response) => {

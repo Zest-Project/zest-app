@@ -2,26 +2,25 @@ const mongoose = require("mongoose");
 
 const IngredientSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true, unique: true},
-    unit: String,
-    estimatedCost: {
-        value: Number,
-        unit: String
-    },
+    name: { type: String, required: true},
+    amount: Number,
     image: String,
-    nutrition: {
+    units: [String],
+    estimatedCost: [{
+        value: Number,
+        currency: String,
+        unit: String
+    }],
+    nutrition: [{
+        unit: String,
         nutrients: [{
             name: String,
             amount: Number,
             unit: String,
             percentOfDailyNeeds: Number
         }],
-        caloricBreakdown: {
-            percentProtein: Number,
-            percentFat: Number,
-            percentCarbs: Number
-        }
-    }
+    }],
+    spoonacularId: {type: Number, required: true}
   },
   { collection: "ingredients" }
 );

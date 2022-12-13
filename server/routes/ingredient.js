@@ -27,12 +27,15 @@ router.get("/", async (request, response) => {
 
 });
 
-router.get("/getRecipes/:ingredient_id", async (request, response) => {
+router.get("/getRecipes/:ingredients", async (request, response) => {
   const params = request.params;
 
-  console.log("navigating to ingredeints + " + params.ingredient_id);
-  const ingredeints = await Ingredient.find({});
-  const recipes = await Recipe.find({ ingredients : mongoose.Types.ObjectId(params.ingredient_id) });
+  console.log("navigating to ingredients + " + params.ingredients);
+  // const ingredeints = await Ingredient.find({ _id: { $in: params.ingredeints}});
+  const ingredientIds = JSON.parse(params.ingredients)
+  // const recipes = await Recipe.find({ ingredients : mongoose.Types.ObjectId(params.ingredient_id) });
+  const recipes = await Recipe.find( { ingredients: { $in: ingredientIds}});
+  
 
   // { _id : { $in: body.ingredeints }}
 

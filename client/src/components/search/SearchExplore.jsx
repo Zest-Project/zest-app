@@ -86,8 +86,8 @@ const SearchExplore = ({searchComponent}) => {
   useEffect(()=> {
     if (query.length >= 1 && searchParam.includes("ingredients")) {
       const newIngredients = ingredients.filter(ingredient => {
-        console.log("filter ingredient: " + ingredient.ingredientName);
-        return ingredient.ingredientName.includes(query);
+        console.log("filter ingredient: " + ingredient.name);
+        return ingredient.name.toLowerCase().includes(query);
       })
       setIngredients(newIngredients);
       search(query);
@@ -118,10 +118,12 @@ const SearchExplore = ({searchComponent}) => {
     if (searchParam.includes("ingredients")) {
       console.log("here in ingredients:");
   
-      console.log("ingredient: " + JSON.stringify(ingredients) + query);
-      
+      console.log("ingredients: " + JSON.stringify(ingredients) + query);
+      const ingredientIds = ingredients.map((ingredient)=> ingredient._id? ingredient._id : "");
+      console.log("ingredientIds: " + JSON.stringify(ingredientIds) + " query: " +  query);
+
       if(ingredients.length >= 1) {
-        await ingredientContext.getRecipeByIngredient(ingredients).then((response) => {
+        await ingredientContext.getRecipeByIngredient(JSON.stringify(ingredientIds)).then((response) => {
           if (response) {
             console.log("response in search explore: " + JSON.stringify(response.data.recipes));
             setRecipes(response.data.recipes);
@@ -138,7 +140,7 @@ const SearchExplore = ({searchComponent}) => {
       return;
     }
     if (searchParam.includes("cuisineType")) {
-      console.log("here in ingredients:");
+      console.log("here in cuisineType:");
       const newRecipes = recipes.filter((recipe) => {
         console.log("*****" + recipe.cuisineType + " " + query)
         return recipe.cuisineType.toLowerCase().includes(query);
@@ -147,7 +149,7 @@ const SearchExplore = ({searchComponent}) => {
         setRecipes(newRecipes);
       }
       else {
-        getRecipes();
+        getRecipes("allRecipes");
       }
       return;
     }
@@ -165,7 +167,7 @@ const SearchExplore = ({searchComponent}) => {
         setRecipes(newRecipes);
       }
       else {
-        getRecipes();
+        getRecipes("allRecipes");
       }
       return;
     }
@@ -179,7 +181,7 @@ const SearchExplore = ({searchComponent}) => {
         setRecipes(newRecipes);
       }
       else {
-        getRecipes();
+        getRecipes("allRecipes");
       }
       return;
     }

@@ -14,10 +14,12 @@ const RecipeProvider = ({children}) => {
 
     const addRecipe = async (recipename, cuisineType, ingredients) => {
       console.log(JSON.stringify(ingredients));
+      let ingredientIds = ingredients.map((ingredient)=> ingredient._id);
+      // ingredientIds = JSON.stringify(ingredientIds)
       await axios.post("/api/recipe", {
         recipename: recipename,
         cuisineType: cuisineType,
-        ingredients: ingredients
+        ingredients: JSON.stringify(ingredientIds)
       }, { headers: { "Authorization": `Bearer ${token}`} })
       .then((response) => {
         console.log(response.data);

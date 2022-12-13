@@ -11,12 +11,15 @@ router.post("/", async (request, response) => {
   if (!request.body) {
     errors.push("no request body");
   }
-  // console.log(request.body.recipename);
+  console.log("HERE adding recipe: " + request.body.ingredients);
 
   const { body, user } = request;
   const recipename = body.recipename;
   const cuisineType = body.cuisineType;
-  const ingredients = body.ingredients.map((ingredient) => mongoose.Types.ObjectId(ingredient));
+  let ingredients = JSON.parse(body.ingredients);
+  ingredients = ingredients.map((ingredient) => {
+    console.log("addRecipe ingredientid: " + ingredient);
+    return mongoose.Types.ObjectId(ingredient)});
 
   console.log("navigating to recipe");
   console.log(recipename + "ingredients: " + JSON.stringify(ingredients));

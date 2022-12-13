@@ -16,7 +16,8 @@ const IngredientProvider = ({ children }) => {
     // console.log(ingredients[0]._id);
     return await axios
       .get(
-        `/api/ingredient/getRecipes/${ingredients[0]._id}`,
+        // `/api/ingredient/getRecipes/${ingredients[0]._id}`,
+        `/api/ingredient/getRecipes/${ingredients}`,
         { headers: { Authorization: `Bearer ${token}` } },
         // {
         //   params: {

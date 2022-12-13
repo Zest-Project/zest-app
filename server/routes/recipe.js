@@ -6,125 +6,254 @@ const mongoose = require("mongoose")
 
 const Recipe = require("../models/recipe");
 const User = require("../models/user");
+const Ingredient = require("../models/ingredient");
 
-router.post("/", async (request, response) => {
-  if (!request.body) {
-    errors.push("no request body");
-  }
-  // console.log(request.body.recipename);
+const CUISINE_TYPES = [
+  "African",
+  "American",
+  "British",
+  "Cajun",
+  "Caribbean",
+  "Chinese",
+  "Eastern European",
+  "European",
+  "French",
+  "German",
+  "Greek",
+  "Indian",
+  "Irish",
+  "Italian",
+  "Japanese",
+  "Jewish",
+  "Korean",
+  "Latin American",
+  "Mediterranean",
+  "Mexican",
+  "Middle Eastern",
+  "Nordic",
+  "Southern",
+  "Spanish",
+  "Thai",
+  "Vietnamese"
+];
 
-  const { body, user } = request;
-  const recipename = body.recipename;
-  const cuisineType = body.cuisineType;
-  const ingredients = body.ingredients.map((ingredient) => mongoose.Types.ObjectId(ingredient));
+const DIETS = [
+  "gluten free",
+  "ketogenic",
+  "vegetarian",
+  "vegan",
+  "pescetarian",
+  "paleo",
+  "primal",
+  "lowFODMAP",
+  "whole30",
+  "dairy free"
+];
 
-  console.log("navigating to recipe");
-  console.log(recipename + "ingredients: " + JSON.stringify(ingredients));
+router.get("/getDietOptions", async (request, response) => {
+  response.send({
+    status: "ok",
+    diets: DIETS
+  });
+});
 
+router.get("/getCuisines", async (request, response) => {
+  response.send({
+    status: "ok",
+    cuisines: CUISINE_TYPES
+  });
+});
+
+// get filtered recipes
+router.get("/getFiltered", async (request, response) => {
+  let cuisine = request.body.cuisine; // string
+  let diet = request.body.diet; // string
+
+  let query = {};
+  if (cuisine)
+    query.cuisines = cuisine;
+  if (diet)
+    query.diets = diet;
+  
+  let recipes = await Recipe.find(query);
+  response.send({
+    status: "ok",
+    recipes: recipes
+  });
+});
+
+// get recipe by id
+router.get("/findById/:id", async (request, response) => {
   let errors = [];
-  if (!recipename || !cuisineType) {
-    errors.push("incomplete info");
-  }
-  if (recipename.length < 5 || recipename.length > 50) {
-    errors.push("recipename must be between 5 and 50 characters.");
-  }
-  if (!user) {
-    errors.push("no associated user");
-  }
-  if (errors.length > 0) {
-    return response.send({ status: "error", errors: errors });
-  }
 
-  const recipe = await Recipe.create({
-    recipeName: recipename,
-    cuisineType: cuisineType,
-    ingredients: ingredients
+  let recipe = await Recipe.findById(request.params.id);
+  if (!recipe)
+    errors.push("recipe not found");
+  
+  if (errors.length > 0)
+    response.send({
+      status: "error",
+      errors: errors
+    });
+  else
+    response.send({
+      status: "ok",
+      recipe: recipe
+    });
+});
+
+async function getIngredientNutrientsForRecipe(recipe) {
+  let ingredients = [];
+
+  const promises = recipe.ingredients.map(async ingredient => {
+    const obj = await Ingredient.findOne(
+      {
+        spoonacularId: ingredient.spoonacularId
+      }); 
+    let index = obj.units.indexOf(ingredient.unit);
+    let nutrition = obj.nutrition[index];
+    return {
+      amount: ingredient.amount,
+      nutrients: nutrition.nutrients
+    }
   });
 
-  // getAllRecipes.map((recipe) => {
-  //   if (!userRecipes.indexOf(recipe._id) <= -1) {
-  //     userRecipes.push(recipe._id);
-  //   }
-  // });
+  const objs = await Promise.all(promises);
 
-  if (recipe) {
-    let newCreatedRecipes = user.createdRecipes;
-    if (newCreatedRecipes.indexOf(recipe._id <= -1)) {
-      newCreatedRecipes.push(recipe._id);
-    }
-    let userRecipes = user.recipes;
-    if (userRecipes.indexOf(recipe._id <= -1)) {
-      userRecipes.push(recipe._id);
-    }
-    const update_user = await User.findByIdAndUpdate(user._id, {
-      createdRecipes: newCreatedRecipes,
-      recipes: userRecipes
-    });
-    if (update_user) {
-      return response.send({
-        status: "ok",
-        _id: recipe.id,
-        recipename: recipe.recipename,
-        cuisineType: recipe.cuisineType,
-        username: user.username,
+  objs.forEach(obj => {
+    ingredients.push(obj);
+  });
+
+  return ingredients;
+}
+
+// get recipe nutritional data
+router.get("/getNutrition/:id", async (request, response) => {
+  let errors = [];
+
+  let recipe = await Recipe.findById(request.params.id);
+  if (!recipe)
+    errors.push("recipe not found");
+
+  if (errors.length == 0) {
+    
+    let ingredients = await getIngredientNutrientsForRecipe(recipe);
+    let out = [];
+    ingredients.forEach( ingredient => {
+      ingredient.nutrients.forEach((currNutrient) => {
+        let index = out.findIndex(entry => {
+          return entry.name.normalize() === currNutrient.name.normalize();
+        });
+  
+        if (index < 0) {
+          out.push({
+            name: currNutrient.name,
+            amount: (ingredient.amount / recipe.servings) * currNutrient.amount, 
+            unit: currNutrient.unit,
+            percentOfDailyNeeds: (ingredient.amount / recipe.servings) * currNutrient.percentOfDailyNeeds
+          });
+        } else {
+          console.log(`${out[index].unit}  ${currNutrient.unit}`);
+          out[index].amount += (ingredient.amount / recipe.servings) * currNutrient.amount
+          out[index].percentOfDailyNeeds += (ingredient.amount / recipe.servings) * currNutrient.percentOfDailyNeeds;
+        }
       });
+    });
+    
+    response.send({
+      status: "ok",
+      nutrition: out
+    });
+    
+  }
+
+  if (errors.length > 0)
+    response.send({
+      status: "error",
+      errors: errors
+    });
+});
+
+async function getIngredientCostForRecipe(recipe) {
+  let ingredients = [];
+
+  const promises = recipe.ingredients.map(async ingredient => {
+    const obj = await Ingredient.findOne(
+      {
+        spoonacularId: ingredient.spoonacularId
+      }); 
+    let index = obj.units.indexOf(ingredient.unit);
+    let estimatedCost = obj.estimatedCost[index];
+    return {
+      name: ingredient.name,
+      amount: ingredient.amount,
+      estimatedCost: estimatedCost
     }
-  } else {
-    errors.push("recipe not created");
-    return response.send({ status: "error", errors: errors });
+  });
+
+  const objs = await Promise.all(promises);
+
+  objs.forEach(obj => {
+    ingredients.push(obj);
+  });
+
+  return ingredients;
+}
+
+// get recipe cost
+router.get("/getRecipeCost/:id", async (request, response) => {
+  let errors = [];
+
+  let recipe = await Recipe.findById(request.params.id);
+  if (errors.length == 0) {
+    let ingredientCosts = await getIngredientCostForRecipe(recipe);
+    let totalDollars = 0;
+    let totalCents = 0;
+
+    ingredientCosts.forEach(ingredient => {
+      if (ingredient.estimatedCost.currency.normalize() === "US Cents") {
+        totalCents += ingredient.amount * ingredient.estimatedCost.value;
+      } else if (ingredient.estimatedCost.currency.normalize() === "US Cents") {
+        totalDollars += ingredient.amount * ingredient.estimatedCost.value;
+      }
+    });
+    
+    totalDollars += totalCents / 100;
+    
+    response.send({
+      status: "ok",
+      costs: {
+        ingredientCost: ingredientCosts,
+        totalInDollars: Math.round(totalDollars * 100) / 100
+      }
+    });
+    
   }
 });
 
-router.get("/:search_component", async (request, response) => {
-    const user = request.user;
-    const params = request.params;
-
-    console.log("navigating to recipes + " + params.search_component);
-    const usr = await User.findById(user._id);
-
-    let errors = [];
-    if (usr) {
-    //   const recipes = Recipe.findById
-      let allRecipes;
-      if (params.search_component == "createdRecipes") {
-        allRecipes = await Recipe.find({ _id : { $in: usr.createdRecipes }});
+// get recipes by username
+router.get("/findByUsername/:username", async (request, response) => {
+  // console.log("endpoint hit");
+  let recipes = await Recipe.find(
+    {
+      creator: request.params.username
+    },
+    {
+      name: 1,
+      image: 1,
+      servings: 1,
+      readyInMinutes: 1,
+      cuisines: 1,
+      diets: 1,
+      ingredients: {
+        name: 1
       }
-      else if (params.search_component == "savedRecipes") {
-        allRecipes = await Recipe.find({ _id : { $in: usr.savedRecipes }});
-      }
-      else if (params.search_component == "allRecipes") {
-        allRecipes = await Recipe.find({ _id : { $in: usr.recipes }});
-      }
-      return response.status(200).send({
-        status: "ok",
-        recipes: allRecipes,
-      });
-    } else {
-      errors.push("recipes not found");
-      return response.status(400).send({ status: "error", errors: errors });
-    }
-
+    });
+  
+  response.send({
+    status: "ok",
+    recipes: recipes
+  });
 });
-
-// router.get("/getIngredients", async (request, response) => {
-//   const user = request.user;
-//   const body = request.body;
-
-//   console.log("navigating to recipes/getIngredients");
-//   const allRecipes = await Recipe.find({ ingredients : { $in: body.ingredient }});
-
-//   let errors = [];
-//   if (allRecipes) {
-//   //   const recipes = Recipe.findById
-//     return response.status(200).send({
-//       status: "ok",
-//       recipes: allRecipes,
-//     });
-//   } else {
-//     errors.push("recipes not found");
-//     return response.status(400).send({ status: "error", errors: errors });
-//   }
-
-// });
 
 module.exports = router;

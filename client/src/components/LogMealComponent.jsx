@@ -7,8 +7,8 @@ import UnstyledSelectForm from './UnstyledSelectForm';
 
 const LogMealComponent = () => {
   // const [fullServing, setFullServing] = useState();
-  const values1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const values2 = ["1/4", "1/2", "1/3", "2/3", "3/4"]
+  const values1 = [{ "name": 1 } , { "name": 2} , { "name": 3 },{ "name": 4}, { "name": 5},{ "name": 6},{ "name": 7},{ "name": 8}, { "name": 9}];
+  const values2 = [{ "name": "1/4"}, { "name": "1/2" }, { "name": "1/3"}, { "name": "2/3"}, { "name": "3/4"}]
 
   return (
     <div className="log_meal_component container">

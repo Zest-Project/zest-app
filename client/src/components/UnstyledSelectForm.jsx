@@ -11,13 +11,13 @@ import down_arrow from "../images/dropdown_arrow.svg";
 import up_arrow from "../images/dropdown_up.svg";
 
 const colors = {
-  "light_olive_green": "#517951",
-  "deep_olive_green": "#4E5E4E",
-  "light_forest_green": "#D2E0CE",
-  "dark_forest_green": "#213634",
-  "off_white": "#F6EFEF",
-  "salmon": "#F2C6B2",
-  "deep_yellow": "#FAC25C"
+  light_olive_green: "#517951",
+  deep_olive_green: "#4E5E4E",
+  light_forest_green: "#D2E0CE",
+  dark_forest_green: "#213634",
+  off_white: "#F6EFEF",
+  salmon: "#F2C6B2",
+  deep_yellow: "#FAC25C",
 };
 
 const StyledButton = styled("button")`
@@ -125,14 +125,30 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
   return <SelectUnstyled {...props} ref={ref} slots={slots} />;
 });
 
-export default function UnstyledSelectForm({values}) {
+export default function UnstyledSelectForm({
+  values,
+  handleSelected,
+  selected,
+}) {
+  // const [selected, setSelected] = useState([]);
+
   return (
     <div>
-        <Box>
-          <CustomSelect defaultValue={values[0]} id="named-select">
-            {values.map((data, index) => (<StyledOption key={index} value={data}> {data} </StyledOption>))}
-          </CustomSelect>
-        </Box>
+      <Box>
+        <CustomSelect
+          defaultValue={values[0]}
+          id="named-select"
+          value={selected ? selected.name : " "}
+          onChange={(event, newValue) => handleSelected(newValue)}
+        >
+          {values.map((value, index) => (
+            <StyledOption key={value._id? value._id : index} value={value}>
+              {" "}
+              {value.name}{" "}
+            </StyledOption>
+          ))}
+        </CustomSelect>
+      </Box>
     </div>
   );
 }

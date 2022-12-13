@@ -34,7 +34,7 @@ const CuisineType = ({recipes, cuisineType}) => {
     // console.log("scrolling right: " + right);
   }, [right]);
 
-  console.log("cuisinetype: " +  cuisineType + " recipes: " + recipes);
+  console.log("cuisinetype: " +  cuisineType + " recipes: " + JSON.stringify(recipes));
 
   return (
     <div className="cuisine_type container ">
@@ -47,6 +47,7 @@ const CuisineType = ({recipes, cuisineType}) => {
         <div ref={sliderRef} id="slider" className="scroll_bar">
           {recipes.map((d) => {
             if (d.cuisineType.toLowerCase() === cuisineType.toLowerCase()) {
+              
               return <RecipePreview recipeName={d.recipeName} key={d._id} />
             }
           }

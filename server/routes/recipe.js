@@ -315,6 +315,7 @@ router.post("/", async (request, response) => {
     cuisines: cuisines,
     ingredients: ingredients,
     diets: diets,
+    creator: user.username,
     spoonacularId: Date.now()
   });
 

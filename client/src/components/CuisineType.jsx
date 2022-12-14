@@ -47,7 +47,7 @@ const CuisineType = ({recipes, cuisineType}) => {
         <div ref={sliderRef} id="slider" className="scroll_bar">
           {recipes.map((d) => {
             if (d.cuisines.includes(cuisineType)) {
-              return <RecipePreview recipeName={d.name} key={d._id} diets={d.diets} image={d.image} description={d.instructions.steps ? d.instructions.steps.step : null} />
+              return <RecipePreview recipeName={d.name} creator={d.creator} key={d._id} diets={d.diets} image={d.image} description={d.instructions.steps ? d.instructions.steps.step : null} />
             } 
             // else if (d.cuisines.length <= 0) {
             //   return <RecipePreview recipeName={d.name} key={d._id} />

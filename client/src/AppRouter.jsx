@@ -28,12 +28,14 @@ const AppRouter = () => {
 
       <Route element={<ProtectedLayout/>}> 
         <Route exact path="/" element={<LandingPage/>}/>
-        <Route path="/addrecipe" element={<AddRecipe />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/logmeal" element={<LogMeal />} />
-        <Route path="/myrecipes" element={<MyRecipes />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/RecipeDetail" element={<RecipeDetail />} />
+        <Route path="addrecipe" element={<AddRecipe />} />
+        <Route path="explore" element={<Explore />}> 
+          <Route path=":recipename" element={<RecipeDetail />}/> 
+        </Route>
+        <Route path="logmeal" element={<LogMeal />} />
+        <Route path="myrecipes" element={<MyRecipes />} />
+        <Route path="profile" element={<Profile />} />
+        {/* <Route path="RecipeDetail" element={<RecipeDetail />} /> */}
       </Route> 
     </Routes>
   );

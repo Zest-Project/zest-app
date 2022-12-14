@@ -344,7 +344,7 @@ const SearchExplore = ({ searchComponent }) => {
        <div className="recipe_wo_cuisines">
        {recipes && recipes.map((d) => {
           if (d.cuisines.length <= 0) {
-            return <RecipePreview recipeName={d.name} key={d._id} diets={d.diets} image={d.image} description={d.instructions ? d.instructions.steps : ""} />;
+            return <RecipePreview recipeName={d.name} creator={d.creator} key={d._id} diets={d.diets} image={d.image} description={d.instructions ? d.instructions.steps : ""} />;
           }
         })}
        </div>

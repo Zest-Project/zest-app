@@ -10,7 +10,7 @@ import UserContext from "../context/UserProvider";
 
 const defaultValues = {
   recipename: "",
-  cuisineType: "",
+  image: ""
 };
 
 const AddRecipe = () => {
@@ -21,28 +21,41 @@ const AddRecipe = () => {
   const [ingredients, setIngredients] = useState([]);
   const [recipeIngredients, setRecipeIngredients] = useState([]);
   const userContext = useContext(UserContext);
+  const [diets, setDiets] = useState([]);
+  const [selectedDiets, setSelectedDiets] = useState([]);
+  const [selectedDiet, setSelectedDiet] = useState("NA");
   const [cuisineTypes, setCuisineTypes] = useState([]); // get cuisinetypes
-  const [selectedCuisineType, setSelectedCuisineType] = useState();
+  const [selectedCuisineTypes, setSelectedCuisineTypes] = useState([]);
+  const [selectedCuisineType, setSelectedCuisineType] = useState("NA");
 
   const getCuisineTypes = async () => {
-    await userContext.getRecipes("allRecipes").then((response) => {
+    await recipeContext.getCuisineTypes().then((response) => {
       if (response) {
-        const recipes = response.data.recipes
-        console.log("response in search explore: " + recipes);
-        // setRecipes(response.data.recipes);
-        if (recipes) {
-          let tempCuisineTypes = [];
-          recipes.map((recipe) => {
-            recipe.cuisines.map((cuisineType) => {tempCuisineTypes.push(cuisineType)})
-          })
-          setCuisineTypes([...new Set(tempCuisineTypes)]);
-        }
-      }
-      else {
+        // console.log(
+        //   "get cuisines response in search explore: " +
+        //     JSON.stringify(response.data.cuisines)
+        // );
+        setCuisineTypes(response.data.cuisines);
+      } else {
         console.log("error");
       }
-    })
-  }
+    });
+  };
+
+  const getDiets = async () => {
+    await recipeContext.getDiets().then((response) => {
+      if (response) {
+        // console.log(
+        //   "get cuisines response in search explore: " +
+        //     JSON.stringify(response.data.cuisines)
+        // );
+        setDiets(response.data.diets);
+      } else {
+        console.log("error");
+      }
+    });
+  };
+
 
   const getIngredients = async () => {
     await ingredientContext.getIngredients().then((response) => {
@@ -58,6 +71,7 @@ const AddRecipe = () => {
   useEffect(() => {
     getIngredients();
     getCuisineTypes();
+    getDiets();
   }, []);
 
   const handleInputChange = (e) => {
@@ -76,8 +90,10 @@ const AddRecipe = () => {
     );
     recipeContext.addRecipe(
       formValues.recipename,
-      formValues.cuisineType,
-      recipeIngredients
+      formValues.image,
+      selectedCuisineTypes,
+      recipeIngredients,
+      selectedDiets
     );
   };
 
@@ -95,21 +111,26 @@ const AddRecipe = () => {
   };
 
   const handleCuisineTypeSelected = (selectedCuisineTypeFromDropdown) => {
-    // event.preventDefault;
-    // let tempIngredients = recipeIngredients;
-    // tempIngredients.push(event.target.value);
-    // const value = event.target.value
-    // console.log("AAAAAAAAAAAAHHH **** " + JSON.stringify(selectedIngredientFromDropdown));
+
     setSelectedCuisineType(selectedCuisineTypeFromDropdown.name);
-    // setRecipeIngredients([
-    //   ...recipeIngredients,
-    //   selectedIngredientFromDropdown,
-    // ]);
+
     if ( selectedCuisineTypeFromDropdown.name.toLowerCase() ) {
-      setFormValues({
-        ...formValues,
-        cuisineType: selectedCuisineTypeFromDropdown.name,
-      });
+      setSelectedCuisineTypes([
+        ...selectedCuisineTypes,
+        selectedCuisineTypeFromDropdown.name,
+      ]);
+    }
+  };
+
+  const handleDietSelected = (selectedDietFromDropdown) => {
+
+    setSelectedDiet(selectedDietFromDropdown.name);
+
+    if ( selectedDietFromDropdown.name.toLowerCase() ) {
+      setSelectedDiets([
+        ...selectedDiets,
+        selectedDietFromDropdown.name,
+      ]);
     }
   };
 
@@ -149,7 +170,7 @@ const AddRecipe = () => {
           />
 
           { recipeIngredients && recipeIngredients.map((ingredient) => (
-            <div> {ingredient.name} </div>
+            <div key={ingredient._id}> {ingredient.name} </div>
           ))}
         </div>
 
@@ -161,24 +182,34 @@ const AddRecipe = () => {
             selected={selectedCuisineType}
           />
 
-          { selectedCuisineType && 
-            <div> {selectedCuisineType} </div>
-          }
+          { selectedCuisineTypes && selectedCuisineTypes.map((element, index) => (
+            <div key={index}> {element} </div>
+          ))}
         </div>
-        <div>
-          <p> Can't find your Cuisine Type, add one here: </p>
+
+        <div className="custom_select">
+          <p> Diet Options: </p>
+          <UnstyledSelectForm
+            values={diets.map((diet) => JSON.parse(`{"name": "${diet}"}`))}
+            handleSelected={handleDietSelected}
+            selected={selectedDiet}
+          />
+
+          { selectedDiets && selectedDiets.map((element, index) => (
+            <div key={index}> {element} </div>
+          ))}
+        </div>
+
         <label>
-          <p> Cuisine Type: </p>
+          <p> Image: </p>
           <input
             type="text"
             className="input"
-            name="cuisineType"
+            name="image"
             // placeholder='username'
             onChange={handleInputChange}
           />
         </label>
-        </div>
-        
 
         <button className="button" type="submit" value="Submit">
           Submit

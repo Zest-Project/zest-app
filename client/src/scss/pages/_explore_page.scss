@@ -10,5 +10,11 @@
         // align-items: center;
         margin-right: 1rem;
     }
+
+    .recipe_wo_cuisines {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 }
 

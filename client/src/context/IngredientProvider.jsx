@@ -12,35 +12,35 @@ const IngredientProvider = ({ children }) => {
   const authContext = useContext(AuthContext);
   const token = authContext.token;
 
-  const getRecipeByIngredient = async (ingredients) => {
-    // console.log(ingredients[0]._id);
-    return await axios
-      .get(
-        // `/api/ingredient/getRecipes/${ingredients[0]._id}`,
-        `/api/ingredient/getRecipes/${ingredients}`,
-        { headers: { Authorization: `Bearer ${token}` } },
-        // {
-        //   params: {
-        //     ingredient: ingredients[0]._id,
-        //   }
-        // }
-      )
-      .then((response) => {
-        if (response.status === 200) {
-          if (response.data.recipes.length >= 1) {
-            return {
-              status: 200,
-              data: response.data,
-            };
-          } else {
-            console.log("no recipes for this ingredient or no ingredient");
-          }
-        }
-      })
-      .catch(function (error) {
-        console.log(error.response.data);
-      });
-  };
+  // const getRecipeByIngredient = async (ingredients) => {
+  //   // console.log(ingredients[0]._id);
+  //   return await axios
+  //     .get(
+  //       // `/api/ingredient/getRecipes/${ingredients[0]._id}`,
+  //       `/api/ingredient/getRecipes/${ingredients}`,
+  //       { headers: { Authorization: `Bearer ${token}` } },
+  //       // {
+  //       //   params: {
+  //       //     ingredient: ingredients[0]._id,
+  //       //   }
+  //       // }
+  //     )
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         if (response.data.recipes.length >= 1) {
+  //           return {
+  //             status: 200,
+  //             data: response.data,
+  //           };
+  //         } else {
+  //           console.log("no recipes for this ingredient or no ingredient");
+  //         }
+  //       }
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error.response.data);
+  //     });
+  // };
 
   const getIngredients = async () => {
     return await axios
@@ -65,7 +65,7 @@ const IngredientProvider = ({ children }) => {
 
   return (
     <IngredientContext.Provider
-      value={{ getRecipeByIngredient, getIngredients }}
+      value={{ getIngredients }}
     >
       {children}
     </IngredientContext.Provider>

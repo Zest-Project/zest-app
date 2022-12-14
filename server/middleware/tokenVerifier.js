@@ -16,7 +16,7 @@ const tokenVerifier = async (request, response, next) => {
   }
   
   const token = authHeader.split(' ')[1];
-  console.log("token: " + token);
+  // console.log("token: " + token);
 
   if (!token || !jwt.verifyToken(token)) {
     response.status(401).end();

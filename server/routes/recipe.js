@@ -64,10 +64,31 @@ router.get("/getCuisines", async (request, response) => {
   });
 });
 
+// get all recipes
+router.get("/", async (request, response) => {
+  // let cuisine = request.body.cuisine; // string
+  // let diet = request.body.diet; // string
+
+  let query = {};
+  // if (cuisine)
+  //   query.cuisines = cuisine;
+  // if (diet)
+  //   query.diets = diet;
+  
+  let recipes = await Recipe.find(query);
+  response.status(200).send({
+    status: "ok",
+    recipes: recipes
+  });
+});
+
 // get filtered recipes
-router.get("/getFiltered", async (request, response) => {
+router.put("/getFiltered", async (request, response) => {
   let cuisine = request.body.cuisine; // string
   let diet = request.body.diet; // string
+
+  console.log("cuisine: " + cuisine);
+  console.log("diet: " + diet);
 
   let query = {};
   if (cuisine)
@@ -76,7 +97,7 @@ router.get("/getFiltered", async (request, response) => {
     query.diets = diet;
   
   let recipes = await Recipe.find(query);
-  response.send({
+  response.status(200).send({
     status: "ok",
     recipes: recipes
   });
@@ -254,6 +275,75 @@ router.get("/findByUsername/:username", async (request, response) => {
     status: "ok",
     recipes: recipes
   });
+});
+
+router.post("/", async (request, response) => {
+  if (!request.body) {
+    errors.push("no request body");
+  }
+  // console.log(request.body.recipename);
+
+  const { body, user } = request;
+  const name = body.name;
+  const cuisines= body.cuisines;
+  const ingredients = body.ingredients;
+  const diets = body.diets;
+  const image = body.image;
+
+  // console.log("navigating to recipe");
+  // console.log(name + "ingredients: " + JSON.stringify(ingredients));
+
+  let errors = [];
+  if (!name || cuisines.length < 1) {
+    errors.push("incomplete info");
+  }
+  if (name.length < 5 || name.length > 50) {
+    errors.push("recipename must be between 5 and 50 characters.");
+  }
+  if (!user) {
+    errors.push("no associated user");
+  }
+  if (errors.length > 0) {
+    return response.send({ status: "error", errors: errors });
+  }
+
+  const myRecipeCount = await Recipe.countDocuments();
+  // console.log("myrecipecount: " + JSON.stringify(myRecipeCount))
+  const recipe = await Recipe.create({
+    name: name,
+    image: image,
+    cuisines: cuisines,
+    ingredients: ingredients,
+    diets: diets,
+    spoonacularId: Date.now()
+  });
+
+  if (recipe) {
+    let newCreatedRecipes = user.createdRecipes;
+    if (newCreatedRecipes.indexOf(recipe._id <= -1)) {
+      newCreatedRecipes.push(recipe._id);
+    }
+    let userRecipes = user.recipes;
+    if (userRecipes.indexOf(recipe._id <= -1)) {
+      userRecipes.push(recipe._id);
+    }
+    const update_user = await User.findByIdAndUpdate(user._id, {
+      createdRecipes: newCreatedRecipes,
+      recipes: userRecipes
+    });
+    if (update_user) {
+      return response.send({
+        status: "ok",
+        _id: recipe.id,
+        recipename: recipe.name,
+        cuisines: recipe.cuisines,
+        username: user.username,
+      });
+    }
+  } else {
+    errors.push("recipe not created");
+    return response.send({ status: "error", errors: errors });
+  }
 });
 
 module.exports = router;

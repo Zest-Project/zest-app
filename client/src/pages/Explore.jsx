@@ -1,4 +1,4 @@
-import SearchRecipes from "../components/search/SearchRecipes"
+// import SearchRecipes from "../components/search/SearchRecipes"
 import React from 'react'
 import CuisineType from '../components/CuisineType'
 import PageTitle from '../components/PageTitle';
@@ -53,7 +53,7 @@ const Explore = () => {
         </div>
         
         <div>
-            <SearchExplore searchComponent="allRecipes"/>
+            <SearchExplore/>
             {/* <CuisineType recipes={recipes} cuisineType="hello"/> */}
             {/* <CuisineType recipes={recipes} cuisineType="hello"/> */}
             {/* <CuisineType recipes={recipes} cuisineType="hello"/> */}

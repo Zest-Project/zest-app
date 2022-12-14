@@ -34,11 +34,11 @@ const CuisineType = ({recipes, cuisineType}) => {
     // console.log("scrolling right: " + right);
   }, [right]);
 
-  console.log("cuisinetype: " +  cuisineType + " recipes: " + JSON.stringify(recipes));
+  // console.log("cuisinetype: " +  cuisineType + " recipes: " + JSON.stringify(recipes));
 
   return (
     <div className="cuisine_type container ">
-      <div className="cuisine_name "> CuisineType: {cuisineType} </div>
+      <div className="cuisine_name "> CuisineType: {cuisineType} </div>      
 
       <div className="cuisine_list" > 
         <div>
@@ -46,10 +46,12 @@ const CuisineType = ({recipes, cuisineType}) => {
         </div>
         <div ref={sliderRef} id="slider" className="scroll_bar">
           {recipes.map((d) => {
-            if (d.cuisines[0].toLowerCase() === cuisineType.toLowerCase()) {
-              
-              return <RecipePreview recipeName={d.name} key={d._id} />
-            }
+            if (d.cuisines.includes(cuisineType)) {
+              return <RecipePreview recipeName={d.name} key={d._id} diets={d.diets} image={d.image} description={d.instructions.steps ? d.instructions.steps.step : null} />
+            } 
+            // else if (d.cuisines.length <= 0) {
+            //   return <RecipePreview recipeName={d.name} key={d._id} />
+            // }
           }
           )}
         </div>

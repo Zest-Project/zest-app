@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -6,7 +6,12 @@ import '../scss/styles'
 import food from '../images/food.jpeg'
 
 
-const RecipePreview = ({recipeName}) => {
+const RecipePreview = ({recipeName, diets, image, description}) => {
+
+	useEffect(()=> {
+		console.log("****** Image: " + image)
+	}, [])
+
   return (
     <div className='recipe_preview container'>
 			<div className='top'>
@@ -19,14 +24,15 @@ const RecipePreview = ({recipeName}) => {
 			<div className='middle'>
 				<div> {recipeName} </div>
 				<div className='image_container'>
-					<img src={food} alt="food"/>
+					<img src={image? image : food} alt="food"/>
 				</div>
 				<div className='tags_container'>
-					<div className='tag'> Lorem ipsum </div>
-					<div className='tag'> Magna aliqu </div>
+					{diets && diets.map((diet) => <div className='tag'> {diet} </div> )}
+					{/* <div className='tag'> Lorem ipsum </div>
+					<div className='tag'> Magna aliqu </div> */}
 				</div>
 				<div className='description'> 
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+					<p> {description} </p>
 				</div>
 			</div>
 			<div className='bottom'>
